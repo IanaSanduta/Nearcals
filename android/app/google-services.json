@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "247523491337",
+    "firebase_url": "https://nearcals-default-rtdb.firebaseio.com",
+    "project_id": "nearcals",
+    "storage_bucket": "nearcals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247523491337:android:da6d24f1ce5963982f42d8",
+        "android_client_info": {
+          "package_name": "com.example.nearcals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247523491337-kl4ppaan821da48d3mhvic81em5tgj1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBRuIHwceGXs1A9HYNAyKyvmFU3wXuozU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247523491337-kl4ppaan821da48d3mhvic81em5tgj1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

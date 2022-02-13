@@ -1,7 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nearcals/login.dart';
+import 'register.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MaterialApp(
     home: Home(),
   ));
@@ -12,7 +17,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      home: Scaffold(
         backgroundColor: Colors.blue.shade900,
         body: SafeArea(
           child: Column(
@@ -42,7 +48,7 @@ class Home extends StatelessWidget {
                 child: Container(
                   child: Image.asset('resources/logo.png'),
                   padding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                 ),
               ),
               Expanded(
@@ -55,12 +61,15 @@ class Home extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         child: MaterialButton(
-                          onPressed: () {
-                            //TODO:Implement login functionality.
-                            },
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegScreen())),
                           minWidth: 200.0,
                           height: 42.0,
-                          child: Text('Register',style: TextStyle(fontSize: 20, color: Colors.blue)),
+                          child: Text('Register',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.blue)),
                         ),
                       ),
                     ),
@@ -70,10 +79,15 @@ class Home extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         child: MaterialButton(
-                          onPressed: () =>  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen())),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen())),
                           minWidth: 200.0,
                           height: 42.0,
-                          child: Text('Log In',style: TextStyle(fontSize: 20, color: Colors.blue)),
+                          child: Text('Log In',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.blue)),
                         ),
                       ),
                     ),
@@ -82,6 +96,8 @@ class Home extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
