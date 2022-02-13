@@ -6,6 +6,7 @@ import 'register.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MaterialApp(
     home: Home(),
   ));
