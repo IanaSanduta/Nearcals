@@ -7,8 +7,47 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(const MaterialApp(
-    home: Home(),
+  runApp(MaterialApp(
+    home: const Home(),
+    theme: ThemeData(
+
+      //Define the default colors
+      scaffoldBackgroundColor: Colors.blue.shade900,
+
+      //Define the default text styling for headlines, titles, bodies of text, and more.
+      textTheme: const TextTheme(
+        headline2: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold,color: Colors.white,letterSpacing: 1.5,),),
+
+      //Define the default Elevated Buttons
+      elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(
+        primary: Colors.white,
+        onPrimary: Colors.blue,
+        textStyle: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        minimumSize: const Size(200,42),)),
+
+      //Define the default InputDecoration of TextField
+      inputDecorationTheme: const InputDecorationTheme(
+        hintStyle: TextStyle(fontSize: 15, color: Colors.white),
+        labelStyle: TextStyle(fontSize: 15, color: Colors.white),
+        errorStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+          BorderSide(color: Colors.lightBlueAccent, width: 1.0),
+          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide:
+          BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),),
+
+    ),
   ));
 }
 
@@ -17,87 +56,40 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.blue.shade900,
+    return Scaffold(
         body: SafeArea(
           child: Column(
             children: [
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'NearCals',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 40,
-                          letterSpacing: 1.5,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Text('NearCals', style: Theme.of(context).textTheme.headline2,),
                 ),
               ),
               Expanded(
                 flex: 2,
                 child: Container(
                   child: Image.asset('resources/logo.png'),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                 ),
               ),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Material(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        child: MaterialButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegScreen())),
-                          minWidth: 200.0,
-                          height: 42.0,
-                          child: Text('Register',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.blue)),
-                        ),
-                      ),
+                    ElevatedButton(
+                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const RegScreen())),
+                      child: const Text('Sign Up'),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Material(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        child: MaterialButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen())),
-                          minWidth: 200.0,
-                          height: 42.0,
-                          child: Text('Log In',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.blue)),
-                        ),
-                      ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen())),
+                      child: const Text('Log In'),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
