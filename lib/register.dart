@@ -32,8 +32,7 @@ class _RegScreenState extends State<RegScreen> {
     }else if (val.length < 4) {
       return "Username must be at least 4 characters";
     } else if (val.length > 20) {
-      return ''' Username must not be greater than
-       20 characters''';
+      return ''' Username must not be greater than 20 characters''';
     }
 
     return null;
@@ -66,9 +65,7 @@ class _RegScreenState extends State<RegScreen> {
 
     if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,20}$').hasMatch(value))
     {
-      return ''' Password must be at least 8 character, 
-      and at least 1 uppercase, 1 lowercase, 
-      1 number, and 1 symbol.''';
+      return ''' Password must be at least 8 character, and at least 1 uppercase, 1 lowercase, 1 number, and 1 symbol.''';
     }
 
     var pass1 = _password1.toString().trim();
