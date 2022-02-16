@@ -29,10 +29,11 @@ class _RegScreenState extends State<RegScreen> {
     var val = value.toString().trim();
     if(val.isEmpty) {
       return "This field is required";
-    }else if (val.length < 6) {
+    }else if (val.length < 4) {
       return "Username must be at least 4 characters";
     } else if (val.length > 20) {
-      return "Username must not be greater than 20 characters";
+      return ''' Username must not be greater than
+       20 characters''';
     }
 
     return null;
@@ -47,7 +48,7 @@ class _RegScreenState extends State<RegScreen> {
     if(val.isEmpty) {
       return "This field is required";
     }
-    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(val)) {
+    if (!RegExp(r'\w+@\w+\.[a-z]{3}').hasMatch(val)) {
       return "Please enter a valid email address";
     }
 
@@ -55,17 +56,24 @@ class _RegScreenState extends State<RegScreen> {
   }
 
   String? validatePassword(String? value) {
+    if(value == null) {
+      return null;
+    }
+
+    if(value.isEmpty) {
+      return "Passwords are required";
+    }
+
+    if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,20}$').hasMatch(value))
+    {
+      return ''' Password must be at least 8 character, 
+      and at least 1 uppercase, 1 lowercase, 
+      1 number, and 1 symbol.''';
+    }
 
     var pass1 = _password1.toString().trim();
     var pass2 = _password2.toString().trim();
 
-    if(pass1.isEmpty || pass2.isEmpty) {
-      return "Passwords are required";
-    }else if (pass1.length < 8 || pass1.length < 8) {
-      return "Passwords should be at least 8 characters";
-    } else if (pass1.length > 20 || pass1.length > 20) {
-      return "Passwords should not be greater than 20 characters";
-    }
     if(pass1 != pass2) {
       return "Please make sure your passwords match";
     }
@@ -77,19 +85,27 @@ class _RegScreenState extends State<RegScreen> {
   void authSignUp() async
   {
       if (_formKey.currentState!.validate()) {
-        await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-          email: regEmailController.text.trim(),
-          password: regPassController.text.trim(),
-        );
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user != null) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomePage()));
-        } else {
-          setState(() {});
+        try {
+          //Send the login request to the API
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: regEmailController.text.trim(),
+            password: regPassController.text.trim(),);
+
+          //Check if the user has logged in correctly
+          User? user = FirebaseAuth.instance.currentUser;
+          if (user != null) {
+            Navigator.push(context,
+                           MaterialPageRoute(builder: (context) => const HomePage()));
+          } else {
+            setState(() {});
+          }
+        }
+        on FirebaseAuthException catch (error){
+          //Shows a message in case of error.
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(error.message!),
+                         duration: const Duration(seconds: 3),
+                         backgroundColor: Colors.red.shade900),);
         }
       }
   }
@@ -97,84 +113,91 @@ class _RegScreenState extends State<RegScreen> {
   @override
   Widget build(BuildContext context) {
 
+    //Define Widget variables
     var iconObscure = IconButton(
       icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off, color: Colors.white,),
       onPressed: (){setState(() {_isObscure = !_isObscure;});},
     );
     var styleInput = const TextStyle(color: Colors.white);
 
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Sign Up',
-                  style: Theme.of(context).textTheme.headline2,),
-                const SizedBox(
-                  height: 40.0,
+    //Start of the UI
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sign Up',
+                      style: Theme.of(context).textTheme.headline2,),
+                    const SizedBox(
+                      height: 40.0,
+                    ),
+                    TextFormField(
+                      validator: validateUserName,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        labelText: 'Username',
+                        prefixIcon: Icon(Icons.account_circle, color: Colors.white,),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    TextFormField(
+                      controller: regEmailController,
+                      validator: validateEmail,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.email, color: Colors.white,),
+                        labelText: 'Email',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    TextFormField(
+                      controller: regPassController,
+                      validator: validatePassword,
+                      style: styleInput,
+                      obscureText: _isObscure,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        prefixIcon: const Icon(Icons.lock, color: Colors.white,),
+                        suffixIcon: iconObscure,
+                      ),
+                      onChanged: (value) => _password1 = value,
+                    ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    TextFormField(
+                      validator: validatePassword,
+                      style: styleInput,
+                      obscureText: _isObscure,
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                        prefixIcon: const Icon(Icons.lock, color: Colors.white,),
+                        suffixIcon: iconObscure,
+                      ),
+                      onChanged: (value) => _password2 = value,
+                    ),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    ElevatedButton(
+                      onPressed: authSignUp,
+                      child: const Text('Sign up'),
+                    ),
+                  ],
                 ),
-                TextFormField(
-                  validator: validateUserName,
-                  style: styleInput,
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                    prefixIcon: Icon(Icons.account_circle, color: Colors.white,),
-                  ),
-                ),
-                const SizedBox(
-                  height: 24.0,
-                ),
-                TextFormField(
-                  controller: regEmailController,
-                  validator: validateEmail,
-                  style: styleInput,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.email, color: Colors.white,),
-                    labelText: 'Email',
-                  ),
-                ),
-                const SizedBox(
-                  height: 24.0,
-                ),
-                TextFormField(
-                  controller: regPassController,
-                  validator: validatePassword,
-                  style: styleInput,
-                  obscureText: _isObscure,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: const Icon(Icons.lock, color: Colors.white,),
-                    suffixIcon: iconObscure,
-                  ),
-                  onChanged: (value) => _password1 = value,
-                ),
-                const SizedBox(
-                  height: 24.0,
-                ),
-                TextFormField(
-                  validator: validatePassword,
-                  style: styleInput,
-                  obscureText: _isObscure,
-                  decoration: InputDecoration(
-                    labelText: 'Confirm Password',
-                    prefixIcon: const Icon(Icons.lock, color: Colors.white,),
-                    suffixIcon: iconObscure,
-                  ),
-                  onChanged: (value) => _password2 = value,
-                ),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                ElevatedButton(
-                  onPressed: authSignUp,
-                  child: const Text('Sign up'),
-                ),
-              ],
+              ),
             ),
           ),
         ),

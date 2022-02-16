@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nearcals/login.dart';
+import 'login.dart';
 import 'register.dart';
 
 void main() async {
@@ -13,6 +13,7 @@ void main() async {
 
       //Define the default colors
       scaffoldBackgroundColor: Colors.blue.shade900,
+      primaryColor: Colors.blue.shade900,
 
       //Define the default text styling for headlines, titles, bodies of text, and more.
       textTheme: const TextTheme(
@@ -48,12 +49,14 @@ void main() async {
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),),
 
     ),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
+  //Start of the UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
