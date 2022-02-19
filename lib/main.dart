@@ -32,7 +32,8 @@ void main() async {
       inputDecorationTheme: const InputDecorationTheme(
         hintStyle: TextStyle(fontSize: 15, color: Colors.white),
         labelStyle: TextStyle(fontSize: 15, color: Colors.white),
-        errorStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
+        errorMaxLines: 3,
+        errorStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0)),
         ),
