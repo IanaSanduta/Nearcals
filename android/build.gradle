@@ -19,7 +19,6 @@ allprojects {
     }
 }
 
-
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
@@ -31,3 +30,4 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+   
