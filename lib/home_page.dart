@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nearcals/views/welcomePage.dart';
 import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
         context, MaterialPageRoute(builder: (context) => const Home()));
   }
 
+  //Start of the UI
   @override
   Widget build(BuildContext context) {
     CollectionReference userProfile =
@@ -88,7 +90,35 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: null,
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 186),
+                  child: Icon(
+                    Icons.fastfood,
+                    color: Colors.blue,
+                    size: 200.0,
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => WelcomePage()),
+                    );
+                  },
+                  child: const Text('Explore'),
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

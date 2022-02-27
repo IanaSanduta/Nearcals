@@ -156,7 +156,6 @@ class _RegScreenState extends State<RegScreen> {
                       height: 40.0,
                     ),
                     TextFormField(
-                      controller: regUsernameController,
                       validator: validateUserName,
                       style: styleInput,
                       decoration: const InputDecoration(
