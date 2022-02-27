@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'net/userSetup.dart';
 
 class RegScreen extends StatefulWidget {
   const RegScreen({Key? key}) : super(key: key);
@@ -9,42 +11,43 @@ class RegScreen extends StatefulWidget {
 }
 
 class _RegScreenState extends State<RegScreen> {
-
   //Define variables
   var _isObscure = true;
   var _password1 = '';
   var _password2 = '';
-  final  _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   //Define Firebase variables
   final regEmailController = TextEditingController();
   final regPassController = TextEditingController();
+  final regUsernameController = TextEditingController();
 
   //Define validation methods
   String? validateUserName(String? value) {
-    if(value == null) {
+    if (value == null) {
       return null;
     }
 
     var val = value.toString().trim();
-    if(val.isEmpty) {
+    if (val.isEmpty) {
       return "This field is required";
-    }else if (val.length < 4) {
+    } else if (val.length < 4) {
       return "Username must be at least 4 characters";
     } else if (val.length > 20) {
-      return ''' Username must not be greater than 20 characters''';
+      return ''' Username must not be greater than
+       20 characters''';
     }
 
     return null;
   }
 
   String? validateEmail(String? value) {
-    if(value == null) {
+    if (value == null) {
       return null;
     }
 
     var val = value.toString().trim();
-    if(val.isEmpty) {
+    if (val.isEmpty) {
       return "This field is required";
     }
     if (!RegExp(r'\w+@\w+\.[a-z]{3}').hasMatch(val)) {
@@ -55,23 +58,26 @@ class _RegScreenState extends State<RegScreen> {
   }
 
   String? validatePassword(String? value) {
-    if(value == null) {
+    if (value == null) {
       return null;
     }
 
-    if(value.isEmpty) {
+    if (value.isEmpty) {
       return "Passwords are required";
     }
 
-    if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,20}$').hasMatch(value))
-    {
-      return ''' Password must be at least 8 character, and at least 1 uppercase, 1 lowercase, 1 number, and 1 symbol.''';
+    if (!RegExp(
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,20}$')
+        .hasMatch(value)) {
+      return ''' Password must be at least 8 character, 
+      and at least 1 uppercase, 1 lowercase, 
+      1 number, and 1 symbol.''';
     }
 
     var pass1 = _password1.toString().trim();
     var pass2 = _password2.toString().trim();
 
-    if(pass1 != pass2) {
+    if (pass1 != pass2) {
       return "Please make sure your passwords match";
     }
 
@@ -79,41 +85,53 @@ class _RegScreenState extends State<RegScreen> {
   }
 
   //Define authentication method
-  void authSignUp() async
-  {
-      if (_formKey.currentState!.validate()) {
-        try {
-          //Send the login request to the API
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: regEmailController.text.trim(),
-            password: regPassController.text.trim(),);
+  void authSignUp() async {
+    CollectionReference userProfile =
+        FirebaseFirestore.instance.collection('UserProfile');
 
-          //Check if the user has logged in correctly
-          User? user = FirebaseAuth.instance.currentUser;
-          if (user != null) {
-            Navigator.push(context,
-                           MaterialPageRoute(builder: (context) => const HomePage()));
-          } else {
-            setState(() {});
-          }
+    if (_formKey.currentState!.validate()) {
+      try {
+        //Send the login request to the API
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: regEmailController.text.trim(),
+          password: regPassController.text.trim(),
+        );
+
+        //Check if the user has logged in correctly
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          firebaseUserSetup(regUsernameController.text.trim(),
+              regEmailController.text.trim(), regPassController.text.trim());
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HomePage()));
+        } else {
+          setState(() {});
         }
-        on FirebaseAuthException catch (error){
-          //Shows a message in case of error.
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(error.message!),
-                         duration: const Duration(seconds: 3),
-                         backgroundColor: Colors.red.shade900),);
-        }
+      } on FirebaseAuthException catch (error) {
+        //Shows a message in case of error.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(error.message!),
+              duration: const Duration(seconds: 3),
+              backgroundColor: Colors.red.shade900),
+        );
       }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-
     //Define Widget variables
     var iconObscure = IconButton(
-      icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off, color: Colors.white,),
-      onPressed: (){setState(() {_isObscure = !_isObscure;});},
+      icon: Icon(
+        _isObscure ? Icons.visibility : Icons.visibility_off,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        setState(() {
+          _isObscure = !_isObscure;
+        });
+      },
     );
     var styleInput = const TextStyle(color: Colors.white);
 
@@ -132,16 +150,21 @@ class _RegScreenState extends State<RegScreen> {
                   children: [
                     Text(
                       'Sign Up',
-                      style: Theme.of(context).textTheme.headline2,),
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
                     const SizedBox(
                       height: 40.0,
                     ),
                     TextFormField(
+                      controller: regUsernameController,
                       validator: validateUserName,
                       style: styleInput,
                       decoration: const InputDecoration(
                         labelText: 'Username',
-                        prefixIcon: Icon(Icons.account_circle, color: Colors.white,),
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -152,7 +175,10 @@ class _RegScreenState extends State<RegScreen> {
                       validator: validateEmail,
                       style: styleInput,
                       decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.email, color: Colors.white,),
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Colors.white,
+                        ),
                         labelText: 'Email',
                       ),
                     ),
@@ -166,7 +192,10 @@ class _RegScreenState extends State<RegScreen> {
                       obscureText: _isObscure,
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        prefixIcon: const Icon(Icons.lock, color: Colors.white,),
+                        prefixIcon: const Icon(
+                          Icons.lock,
+                          color: Colors.white,
+                        ),
                         suffixIcon: iconObscure,
                       ),
                       onChanged: (value) => _password1 = value,
@@ -180,7 +209,10 @@ class _RegScreenState extends State<RegScreen> {
                       obscureText: _isObscure,
                       decoration: InputDecoration(
                         labelText: 'Confirm Password',
-                        prefixIcon: const Icon(Icons.lock, color: Colors.white,),
+                        prefixIcon: const Icon(
+                          Icons.lock,
+                          color: Colors.white,
+                        ),
                         suffixIcon: iconObscure,
                       ),
                       onChanged: (value) => _password2 = value,
@@ -200,6 +232,5 @@ class _RegScreenState extends State<RegScreen> {
         ),
       ),
     );
-
   }
 }
