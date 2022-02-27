@@ -16,7 +16,8 @@ Future<void> firebaseUserSetup(
     'uid': uid,
     'username': userName,
     'userEmail': userEmail,
-    'userCal': defaultCal
+    'userCal': defaultCal,
+    'userImage': null
   });
   return;
 }
