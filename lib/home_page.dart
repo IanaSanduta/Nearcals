@@ -51,6 +51,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               ListTile(
+                leading: Icon(Icons.person),
+                title: Text('Account'),
+                onTap: () => '',
+              ),
+              ListTile(
                 leading: Icon(Icons.map),
                 title: Text('Map'),
                 onTap: () => print('map'),
@@ -88,7 +93,7 @@ class _HomePageState extends State<HomePage> {
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column (
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Padding(
@@ -104,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => WelcomePage()),
-                     );
+                    );
                   },
                   child: const Text('Explore'),
                   color: Colors.blue,
@@ -114,7 +119,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-
       ),
     );
   }
