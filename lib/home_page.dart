@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nearcals/views/welcomePage.dart';
 import 'main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,9 +17,12 @@ class _HomePageState extends State<HomePage> {
         context, MaterialPageRoute(builder: (context) => const Home()));
   }
 
-  //Start of the UI
   @override
   Widget build(BuildContext context) {
+    CollectionReference userProfile =
+        FirebaseFirestore.instance.collection('UserProfile');
+    String? userEmail = FirebaseAuth.instance.currentUser?.email;
+    final Stream<QuerySnapshot> userName = userProfile.snapshots();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -31,8 +34,8 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: const Text('nunezGlave'),
-                accountEmail: const Text('admin@gmail.com'),
+                accountName: Text(userName.toString()),
+                accountEmail: Text(userEmail.toString()),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.asset(
@@ -90,6 +93,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -119,6 +123,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+
+        body: null,
       ),
     );
   }
