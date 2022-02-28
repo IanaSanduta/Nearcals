@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'net/userData.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,10 +20,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference userProfile =
-        FirebaseFirestore.instance.collection('UserProfile');
+    String userName = 'UserName';
     String? userEmail = FirebaseAuth.instance.currentUser?.email;
-    final Stream<QuerySnapshot> userName = userProfile.snapshots();
+    String? uID = FirebaseAuth.instance.currentUser?.uid;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
