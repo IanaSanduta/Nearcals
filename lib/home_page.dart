@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nearcals/profile.dart';
 import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'net/userData.dart';
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.asset(
-                      'resources/profile_picture.jpg',
+                      'resources/default_profile.png',
                       width: 90,
                       height: 90,
                       fit: BoxFit.cover,
@@ -49,14 +50,14 @@ class _HomePageState extends State<HomePage> {
                 decoration: const BoxDecoration(
                   color: Colors.amber,
                   image: DecorationImage(
-                      image: AssetImage('resources/drawer_background.jpg'),
+                      image: AssetImage('resources/drawer.jpg'),
                       fit: BoxFit.cover),
                 ),
               ),
               ListTile(
                 leading: Icon(Icons.person),
-                title: Text('Account'),
-                onTap: () => '',
+                title: Text('Profile'),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()),),
               ),
               ListTile(
                 leading: Icon(Icons.map),
@@ -93,37 +94,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 186),
-                  child: Icon(
-                    Icons.fastfood,
-                    color: Colors.blue,
-                    size: 200.0,
-                  ),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => WelcomePage()),
-                    );
-                  },
-                  child: const Text('Explore'),
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                ),
-              ],
-            ),
-          ],
-        ),
-
         body: null,
       ),
     );
