@@ -3,21 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> firebaseUserSetup(
     String userName, String userEmail, String userPass) async {
-  CollectionReference userProfile =
-      FirebaseFirestore.instance.collection('Users');
-
-  FirebaseAuth.instance
-      .signInWithEmailAndPassword(email: userEmail, password: userPass);
-
   FirebaseAuth auth = FirebaseAuth.instance;
-  String uid = auth.currentUser!.uid.toString();
+  auth.currentUser!.updateDisplayName(userName);
   int defaultCal = 2000;
-  userProfile.add({
-    'uid': uid,
-    'username': userName,
-    'userEmail': userEmail,
-    'userCal': defaultCal,
-    'userImage': null
+  CollectionReference userProfile =
+      FirebaseFirestore.instance.collection('UserData');
+  auth
+      .signInWithEmailAndPassword(email: userEmail, password: userPass)
+      .then((value) {
+    userProfile.doc(value.user?.uid).set({
+      'username': userName,
+      'userEmail': userEmail,
+      'userCal': defaultCal,
+      'userImage': null
+    });
   });
+
   return;
 }
