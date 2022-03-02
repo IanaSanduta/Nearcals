@@ -40,53 +40,58 @@ class _HomePageState extends State<HomePage> {
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.asset(
-                      'resources/default_profile.png',
+                      'resources/default_user.png',
                       width: 90,
                       height: 90,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                decoration: const BoxDecoration(
-                  color: Colors.amber,
-                  image: DecorationImage(
-                      image: AssetImage('resources/drawer.jpg'),
-                      fit: BoxFit.cover),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade900,
+                  //image: const DecorationImage(image: AssetImage('resources/drawer.jpg'), fit: BoxFit.cover),
                 ),
               ),
               ListTile(
+                iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.person),
                 title: Text('Profile'),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()),),
               ),
               ListTile(
+                iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.map),
                 title: Text('Map'),
                 onTap: () => print('map'),
               ),
               ListTile(
+                iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.local_dining),
                 title: Text('Calories'),
                 onTap: () => print('calories'),
               ),
               ListTile(
+                iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.favorite),
                 title: Text('Favorites'),
                 onTap: () => print('favorite'),
               ),
               const Divider(),
               ListTile(
+                iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.settings),
                 title: Text('Settings'),
                 onTap: () => print('Settings'),
               ),
               ListTile(
+                iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.description),
                 title: Text('Guide'),
                 onTap: () => print('guide'),
               ),
               const Divider(),
               ListTile(
+                iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.exit_to_app),
                 title: Text('Exit'),
                 onTap: authLongOut,

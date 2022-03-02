@@ -11,8 +11,10 @@ void main() async {
     home: const Home(),
     theme: ThemeData(
       //Define the default colors
-      scaffoldBackgroundColor: Colors.blue.shade900,
       primaryColor: Colors.blue.shade900,
+      splashColor: Colors.red,
+      highlightColor: Colors.black.withOpacity(0.4),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
 
       //Define the default text styling for headlines, titles, bodies of text, and more.
       textTheme: const TextTheme(
@@ -66,6 +68,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade900,
         body: SafeArea(
       child: Column(
         children: [
