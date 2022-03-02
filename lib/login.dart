@@ -12,8 +12,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //Define variables
   bool _isObscure = true;
-  final loginEmailController = TextEditingController()..text = "alexanderbrunong@gmail.com";
-  final loginPassController = TextEditingController()..text = "Password123";
+  final loginEmailController = TextEditingController()..text = "admin@gmail.com";
+  final loginPassController = TextEditingController()..text = "123456";
 
   //Define authentication function
   void authLongIn() async
