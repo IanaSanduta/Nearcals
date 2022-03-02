@@ -86,9 +86,6 @@ class _RegScreenState extends State<RegScreen> {
 
   //Define authentication method
   void authSignUp() async {
-    CollectionReference userProfile =
-        FirebaseFirestore.instance.collection('UserProfile');
-
     if (_formKey.currentState!.validate()) {
       try {
         //Send the login request to the API

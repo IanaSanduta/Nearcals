@@ -4,6 +4,9 @@ import 'main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'net/userData.dart';
 
+String? userEmail = FirebaseAuth.instance.currentUser?.email;
+String? uID = FirebaseAuth.instance.currentUser?.uid;
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
@@ -20,9 +23,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    String userName = 'UserName';
-    String? userEmail = FirebaseAuth.instance.currentUser?.email;
-    String? uID = FirebaseAuth.instance.currentUser?.uid;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(userName.toString()),
+                accountName: Text(userName()),
                 accountEmail: Text(userEmail.toString()),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
@@ -88,7 +88,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: null,
       ),
     );
   }

@@ -1,38 +1,56 @@
 import 'dart:core';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 
-final String uID = FirebaseAuth.instance.currentUser!.uid;
-final db = FirebaseFirestore.instance.collection('UserData');
-final List dbList = ['username', 'userCal', 'userEmail', 'userImage'];
+String uID = FirebaseAuth.instance.currentUser!.uid;
+CollectionReference db = FirebaseFirestore.instance.collection('UserData');
+int dailyCal = userDailyCalGet();
+int currentCal = 0;
+String userEmail = '';
+String username = '';
 
-Future<List> userDataGet() async {
-  List userData = [];
-  final DocumentSnapshot snapshot = await db.doc(uID).get();
+final dynamic userDataList = [userData(0), userDailyCalGet()];
+
+final List dbList = [
+  'username',
+  'userDailyCal',
+  'userCurrentCal',
+  'userEmail',
+  'userImage'
+];
+
+Future<void> userData(elem) async {
+  DocumentSnapshot snapshot = await db.doc(uID).get();
   var data = snapshot.data() as Map;
-  for (int i = 0; i <= dbList.length; i++) {
-    userData.add(data[dbList.elementAt(i)]);
+  if (elem == 0) {
+    username = data[dbList[elem]] as String;
   }
-
-  return userData;
+  if (elem == 1) {
+    dailyCal = data[dbList[elem]];
+  }
+  if (elem == 2) {
+    currentCal = data[dbList[elem]];
+  }
+  if (elem == 3) {
+    userEmail = data[dbList[elem]];
+  }
 }
 
-Future<List> userNameGet() {
-  Future<List> userData = userDataGet();
-  Future<List> userName = userData;
-  return userName;
+String userName() {
+  userData(0);
+  return username;
 }
+
+int userDailyCalGet() {
+  userData(1);
+  return dailyCal;
+}
+
 /*
-int userCalGet() {
-  String userCalData = userData.elementAt(2).toString();
-  int userDailyCal = userCalData as int;
-  return userDailyCal;
-}
-
 void userNameSet(String userName) {}
 
 void userCalSet(int Cals) {}
 
-void userImageSet(PictureLayer userImage) {}
+void userImageSet(String image) {}
 */
+
