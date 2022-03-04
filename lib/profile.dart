@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -56,7 +58,11 @@ class _ProfileState extends State<Profile> {
 
     return ClipOval(
       child: Material(
-        color: const Color.fromARGB(129, 180, 189, 185,
+        color: const Color.fromARGB(
+          129,
+          180,
+          189,
+          185,
         ),
         child: Ink.image(
           image: (fileImg != null)
@@ -67,8 +73,17 @@ class _ProfileState extends State<Profile> {
           height: 200,
           child: InkWell(
               onTap: () async => showImageSource(context),
-              splashColor: const Color.fromARGB(196, 4, 59, 229,),
-              highlightColor: const Color.fromARGB(129, 180, 189, 185,
+              splashColor: const Color.fromARGB(
+                196,
+                4,
+                59,
+                229,
+              ),
+              highlightColor: const Color.fromARGB(
+                129,
+                180,
+                189,
+                185,
               )),
         ),
       ),
@@ -109,9 +124,10 @@ class _ProfileState extends State<Profile> {
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
                     child: const Text('Profile Photo',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                             color: Colors.white),
-                        textAlign:TextAlign.center),
+                        textAlign: TextAlign.center),
                   ),
                   ListTile(
                     iconColor: Colors.blue.shade900,
@@ -146,9 +162,8 @@ class _ProfileState extends State<Profile> {
 
       //Edit and Update photo
       editImage(pickFile.path);
-
     } on PlatformException catch (e) {
-        print(e.message);
+      print(e.message);
     }
   }
 
@@ -160,22 +175,22 @@ class _ProfileState extends State<Profile> {
         cropStyle: CropStyle.circle,
         aspectRatioPresets: Platform.isAndroid
             ? [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ]
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
             : [
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio5x3,
-          CropAspectRatioPreset.ratio5x4,
-          CropAspectRatioPreset.ratio7x5,
-          CropAspectRatioPreset.ratio16x9
-        ],
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
         androidUiSettings: AndroidUiSettings(
           toolbarColor: Colors.blue.shade900,
           toolbarWidgetColor: Colors.white,
@@ -191,7 +206,7 @@ class _ProfileState extends State<Profile> {
 
     //Update photo into UI
     if (editImg != null) {
-        setState(() => fileImg = editImg);
-      }
+      setState(() => fileImg = editImg);
+    }
   }
 }

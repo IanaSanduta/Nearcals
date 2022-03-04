@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:nearcals/views/welcomePage.dart';
 
@@ -46,7 +48,8 @@ class _HomePageState extends State<Home> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => WelcomePage()),
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomePage()),
                   );
                 },
                 child: const Text('Explore'),

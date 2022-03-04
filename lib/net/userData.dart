@@ -1,8 +1,9 @@
+// ignore_for_file: file_names, avoid_print
+
 import 'dart:core';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nearcals/classes/userClass.dart';
-import 'dart:async';
 
 UserClass currentUser = UserClass('', '', '', 0, 0);
 String uID = FirebaseAuth.instance.currentUser!.uid;
