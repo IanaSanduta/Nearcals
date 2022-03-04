@@ -1,6 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/net/userData.dart';
 import 'package:nearcals/profile.dart';
 import 'package:nearcals/register.dart';
@@ -29,7 +30,6 @@ class _HomePageState extends State<HomePage> {
     userName ??= FirebaseAuth.instance.currentUser?.displayName;
     userEmail ??= FirebaseAuth.instance.currentUser?.email;
     userName ??= run;
-    print(FirebaseAuth.instance.currentUser?.displayName);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(userName!),
+                accountName: Text(userName),
                 accountEmail: Text(userEmail!),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
@@ -60,8 +60,8 @@ class _HomePageState extends State<HomePage> {
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
-                leading: Icon(Icons.person),
-                title: Text('Profile'),
+                leading: const Icon(Icons.person),
+                title: const Text('Profile'),
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Profile()),
@@ -69,40 +69,40 @@ class _HomePageState extends State<HomePage> {
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
-                leading: Icon(Icons.map),
-                title: Text('Map'),
+                leading: const Icon(Icons.map),
+                title: const Text('Map'),
                 onTap: () => print('map'),
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
-                leading: Icon(Icons.local_dining),
-                title: Text('Calories'),
+                leading: const Icon(Icons.local_dining),
+                title: const Text('Calories'),
                 onTap: () => print('calories'),
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
-                leading: Icon(Icons.favorite),
-                title: Text('Favorites'),
+                leading: const Icon(Icons.favorite),
+                title: const Text('Favorites'),
                 onTap: () => print('favorite'),
               ),
               const Divider(),
               ListTile(
                 iconColor: Colors.blue.shade900,
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
+                leading: const Icon(Icons.settings),
+                title: const Text('Settings'),
                 onTap: () => print('Settings'),
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
-                leading: Icon(Icons.description),
-                title: Text('Guide'),
+                leading: const Icon(Icons.description),
+                title: const Text('Guide'),
                 onTap: () => print('guide'),
               ),
               const Divider(),
               ListTile(
                 iconColor: Colors.blue.shade900,
-                leading: Icon(Icons.exit_to_app),
-                title: Text('Exit'),
+                leading: const Icon(Icons.exit_to_app),
+                title: const Text('Exit'),
                 onTap: authLongOut,
               ),
             ],

@@ -1,6 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nearcals/net/userData.dart';
 
 Future<void> firebaseUserSetup(
     String userName, String userEmail, String userPass) async {
