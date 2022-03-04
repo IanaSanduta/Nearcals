@@ -5,6 +5,8 @@ import 'home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'net/userSetup.dart';
 
+String run = '';
+
 class RegScreen extends StatefulWidget {
   const RegScreen({Key? key}) : super(key: key);
   @override
@@ -98,6 +100,7 @@ class _RegScreenState extends State<RegScreen> {
         //Check if the user has logged in correctly
         User? user = FirebaseAuth.instance.currentUser;
         if (user != null) {
+          run = regUsernameController.text.trim();
           firebaseUserSetup(regUsernameController.text.trim(),
               regEmailController.text.trim(), regPassController.text.trim());
           Navigator.push(context,

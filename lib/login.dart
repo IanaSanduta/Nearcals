@@ -12,7 +12,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //Define variables
   bool _isObscure = true;
-  final loginEmailController = TextEditingController()..text = "admin@gmail.com";
+  final loginEmailController = TextEditingController()
+    ..text = "admin@gmail.com";
   final loginPassController = TextEditingController()..text = "123456";
 
   //Define authentication function
@@ -24,15 +25,14 @@ class _LoginScreenState extends State<LoginScreen> {
         password: loginPassController.text.trim(),
       );
 
-
       //Check if the user has logged in correctly
       User? user = FirebaseAuth.instance.currentUser;
+
       if (user != null) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const HomePage()));
       } else {
         setState(() {});
-
       }
     } on FirebaseAuthException catch (error) {
       //Shows a message in case of error.

@@ -7,10 +7,10 @@ Future<void> firebaseUserSetup(
   FirebaseAuth auth = FirebaseAuth.instance;
   auth.currentUser!.updateDisplayName(userName);
   int defaultCal = 2000;
+  String defaultUserImage = 'Hello World';
 
   CollectionReference userProfile =
       FirebaseFirestore.instance.collection('UserData');
-  var defaultUserImage = null;
   auth
       .signInWithEmailAndPassword(email: userEmail, password: userPass)
       .then((value) {

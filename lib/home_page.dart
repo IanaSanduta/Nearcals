@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/net/userData.dart';
 import 'package:nearcals/profile.dart';
+import 'package:nearcals/register.dart';
 import 'main.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     String? userEmail = currentUser.getEmail();
     userName ??= FirebaseAuth.instance.currentUser?.displayName;
     userEmail ??= FirebaseAuth.instance.currentUser?.email;
+    userName ??= run;
     print(FirebaseAuth.instance.currentUser?.displayName);
     return MaterialApp(
       home: Scaffold(
@@ -60,7 +62,10 @@ class _HomePageState extends State<HomePage> {
                 iconColor: Colors.blue.shade900,
                 leading: Icon(Icons.person),
                 title: Text('Profile'),
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()),),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Profile()),
+                ),
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
