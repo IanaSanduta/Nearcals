@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nearcals/net/userData.dart';
 import 'home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'net/userSetup.dart';
@@ -86,9 +87,6 @@ class _RegScreenState extends State<RegScreen> {
 
   //Define authentication method
   void authSignUp() async {
-    CollectionReference userProfile =
-        FirebaseFirestore.instance.collection('UserProfile');
-
     if (_formKey.currentState!.validate()) {
       try {
         //Send the login request to the API
