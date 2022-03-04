@@ -1,16 +1,12 @@
 import 'dart:core';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nearcals/classes/userClass.dart';
+import 'dart:async';
 
+UserClass currentUser = UserClass('', '', '', 0, 0);
 String uID = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference db = FirebaseFirestore.instance.collection('UserData');
-int dailyCal = userDailyCalGet();
-int currentCal = 0;
-String userEmail = '';
-String username = '';
-
-final dynamic userDataList = [userData(0), userDailyCalGet()];
-
 final List dbList = [
   'username',
   'userDailyCal',
@@ -19,38 +15,37 @@ final List dbList = [
   'userImage'
 ];
 
-Future<void> userData(elem) async {
+Future<void> pullUserData() async {
   DocumentSnapshot snapshot = await db.doc(uID).get();
   var data = snapshot.data() as Map;
-  if (elem == 0) {
-    username = data[dbList[elem]] as String;
+
+  while (currentUser.getUserName() == null) {
+    currentUser.pullUserName(data[dbList[0]] as String);
   }
-  if (elem == 1) {
-    dailyCal = data[dbList[elem]];
+  print(currentUser.getUserName());
+  while (currentUser.getDailyCals() == null) {
+    currentUser.pullDailyCals(data[dbList[1]] as int);
   }
-  if (elem == 2) {
-    currentCal = data[dbList[elem]];
+  print(currentUser.getDailyCals());
+  while (currentUser.getCurrentCals() == null) {
+    currentUser.pullCurrentCals(data[dbList[2]] as int);
   }
-  if (elem == 3) {
-    userEmail = data[dbList[elem]];
+  print(currentUser.getCurrentCals());
+  while (currentUser.getEmail() == null) {
+    currentUser.pullEmail(data[dbList[3]] as String);
   }
+  print(currentUser.getEmail());
+  while (currentUser.getUserImage() == null) {
+    currentUser.pullUserImage(data[dbList[4]] as String);
+  }
+  print(currentUser.getUserImage());
 }
 
-String userName() {
-  userData(0);
-  return username;
+void checkUserData() {
+  print('Check User Data');
+  print(currentUser.getUserName());
+  print(currentUser.getEmail());
+  print(currentUser.getDailyCals());
+  print(currentUser.getCurrentCals());
+  print(currentUser.getUserImage());
 }
-
-int userDailyCalGet() {
-  userData(1);
-  return dailyCal;
-}
-
-/*
-void userNameSet(String userName) {}
-
-void userCalSet(int Cals) {}
-
-void userImageSet(String image) {}
-*/
-

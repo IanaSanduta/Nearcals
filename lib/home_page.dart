@@ -1,11 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nearcals/classes/userClass.dart';
+import 'package:nearcals/net/userData.dart';
 import 'main.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'net/userData.dart';
-
-String? userEmail = FirebaseAuth.instance.currentUser?.email;
-String? uID = FirebaseAuth.instance.currentUser?.uid;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //Define authentication function
+
   void authLongOut() async {
     await FirebaseAuth.instance.signOut();
     Navigator.push(
@@ -23,6 +21,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    pullUserData();
+    String? userName = currentUser.getUserName();
+    String? userEmail = currentUser.getEmail();
+    userName ??= FirebaseAuth.instance.currentUser?.displayName;
+    userEmail ??= FirebaseAuth.instance.currentUser?.email;
+    print(FirebaseAuth.instance.currentUser?.displayName);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -34,8 +38,8 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(userName()),
-                accountEmail: Text(userEmail.toString()),
+                accountName: Text(userName!),
+                accountEmail: Text(userEmail!),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.asset(

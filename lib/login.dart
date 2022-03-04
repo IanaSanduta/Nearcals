@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nearcals/net/userData.dart';
 import 'home_page.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,45 +10,52 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   //Define variables
   bool _isObscure = true;
   final loginEmailController = TextEditingController();
   final loginPassController = TextEditingController();
 
   //Define authentication function
-  void authLongIn() async
-  {
-      try{
-        //Send the login request to the API
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: loginEmailController.text.trim(),
-          password: loginPassController.text.trim(),);
+  void authLongIn() async {
+    try {
+      //Send the login request to the API
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: loginEmailController.text.trim(),
+        password: loginPassController.text.trim(),
+      );
 
-        //Check if the user has logged in correctly
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user != null) {Navigator.push(context,
-                           MaterialPageRoute(builder: (context) => const HomePage()));
-        } else {
-          setState(() {});
-        }
+      //Check if the user has logged in correctly
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      } else {
+        setState(() {});
       }
-      on FirebaseAuthException catch (error){
-        //Shows a message in case of error.
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error.message!),
-              duration: const Duration(seconds: 3),
-              backgroundColor: Colors.red.shade900),);
-      }
+    } on FirebaseAuthException catch (error) {
+      //Shows a message in case of error.
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(error.message!),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red.shade900),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-
     //Define Widget variables
     var iconObscure = IconButton(
-      icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off, color: Colors.white,),
-      onPressed: (){setState(() {_isObscure = !_isObscure;});},
+      icon: Icon(
+        _isObscure ? Icons.visibility : Icons.visibility_off,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        setState(() {
+          _isObscure = !_isObscure;
+        });
+      },
     );
     var styleInput = const TextStyle(color: Colors.white);
 
@@ -73,7 +81,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: styleInput,
                 decoration: const InputDecoration(
                   hintText: 'Enter your email',
-                  prefixIcon: Icon(Icons.email, color: Colors.white,),
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -84,7 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: styleInput,
                 decoration: InputDecoration(
                   hintText: 'Enter your password',
-                  prefixIcon: const Icon(Icons.lock, color: Colors.white,),
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                    color: Colors.white,
+                  ),
                   suffixIcon: iconObscure,
                 ),
                 obscureText: _isObscure,
@@ -102,7 +116,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-
-
 }
