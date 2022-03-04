@@ -170,6 +170,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+
+  image_cropper:
+    dependency: "direct main"
+    description:
+      name: image_cropper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.0"
+
   image_picker:
     dependency: "direct main"
     description:
@@ -360,3 +369,4 @@ packages:
 sdks:
   dart: ">=2.16.0 <3.0.0"
   flutter: ">=2.8.0"
+

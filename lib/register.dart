@@ -137,6 +137,7 @@ class _RegScreenState extends State<RegScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: Colors.blue.shade900,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),

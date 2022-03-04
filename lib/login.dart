@@ -12,8 +12,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //Define variables
   bool _isObscure = true;
-  final loginEmailController = TextEditingController();
-  final loginPassController = TextEditingController();
+  final loginEmailController = TextEditingController()..text = "admin@gmail.com";
+  final loginPassController = TextEditingController()..text = "123456";
 
   //Define authentication function
   void authLongIn() async {
@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
         password: loginPassController.text.trim(),
       );
 
+
       //Check if the user has logged in correctly
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
             context, MaterialPageRoute(builder: (context) => const HomePage()));
       } else {
         setState(() {});
+
       }
     } on FirebaseAuthException catch (error) {
       //Shows a message in case of error.
@@ -63,6 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: Colors.blue.shade900,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
