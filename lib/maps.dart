@@ -23,7 +23,7 @@ class _MyAppState extends State<Maps> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Foodie Map'),
-          backgroundColor: Color.fromARGB(255, 102, 208, 216),
+          backgroundColor: const Color.fromARGB(255, 102, 208, 216),
         ),
         body: GoogleMap(
           onMapCreated: _onMapCreated,

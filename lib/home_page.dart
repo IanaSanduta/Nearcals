@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/maps.dart';
-import 'package:nearcals/net/userData.dart';
 import 'package:nearcals/profile.dart';
 import 'package:nearcals/register.dart';
 import 'main.dart';
