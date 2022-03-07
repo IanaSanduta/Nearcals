@@ -1,94 +1,111 @@
-// ignore_for_file: file_names
+import 'package:nearcals/classes/utility.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nearcals/net/userData.dart';
+class UserProfile {
+  //Data members
+  late String _userName;
+  late String _email;
+  late String _userImage;
+  late int _dailyCals;
+  late int _currentCals;
 
-class UserClass {
-  String? username = 'un';
-  String? email = 'e';
-  String? userImage = 'ui';
-  int? dailyCals = 0;
-  int? currentCals = 0;
-
-  UserClass(String un, String e, String ui, int dc, int cc,
-      {this.username,
-      this.email,
-      this.userImage,
-      this.dailyCals,
-      this.currentCals});
-
-  //Pull Requests used by backend to update from the Database
-  void pullUserName(String un) {
-    username = un;
+  //Default constructor
+  UserProfile(){
+    _userName = '';
+    _email = '';
+    _userImage = '';
+    _dailyCals = 0;
+    _currentCals = 0;
   }
 
-  void pullEmail(String e) {
-    email = e;
+  //Named constructor
+  UserProfile.useMap(Map data){
+    if(data.length == dbUser.values.length) {
+      _userName = Utility.sentenceCase(data[dbUser.name.text]);
+      _email = data[dbUser.email.text];
+      _userImage =  data[dbUser.image.text];
+      _dailyCals = data[dbUser.dailyCal.text];
+      _currentCals =  data[dbUser.currentCal.text];
+    }
+    else{
+       UserProfile();
+    }
   }
 
-  void pullUserImage(String im) {
-    userImage = im;
+  //Show info of the class
+  @override
+  String toString() {
+    return " userName: $_userName \n userEmail: $_email \n userImage: $_userImage \n dailyCals: $_dailyCals \n currentCals: $_currentCals";
   }
 
-  void pullDailyCals(int dc) {
-    dailyCals = dc;
-  }
-
-  void pullCurrentCals(int cc) {
-    currentCals = cc;
-  }
-
-  //Get Requests used by programers to get specific values from currentUser
-  String? getUserName() {
-    return username;
-  }
-
-  String? getEmail() {
-    return email;
-  }
-
-  String? getUserImage() {
-    return userImage;
-  }
-
-  int? getDailyCals() {
-    return dailyCals;
-  }
-
-  int? getCurrentCals() {
-    return currentCals;
-  }
-
-  //Set used by programmers to set and update the database.
+  //Setters
   void setUserName(String un) {
-    db.doc(uID).update({dbList[0]: un});
-    FirebaseAuth.instance.currentUser?.updateDisplayName(un);
-    currentUser.pullUserName(un);
-    pullUserData();
+    _userName = Utility.sentenceCase(un);
   }
 
   void setEmail(String e) {
-    db.doc(uID).update({dbList[3]: e});
-    FirebaseAuth.instance.currentUser?.updateEmail(e);
-    currentUser.pullEmail(e);
-    pullUserData();
+    _email = e;
   }
 
-  void setCurrentCals(int cc) {
-    db.doc(uID).update({dbList[2]: cc});
-    currentUser.pullCurrentCals(cc);
-    pullUserData();
+  void setUserImage(String im) {
+    _userImage = im;
   }
 
   void setDailyCals(int dc) {
-    db.doc(uID).update({dbList[1]: dc});
-    currentUser.pullDailyCals(dc);
-    pullUserData();
+    _dailyCals = dc;
   }
 
-  void setUserImage(String ui) {
-    db.doc(uID).update({dbList[4]: ui});
-    currentUser.pullUserImage(ui);
-    pullUserData();
+  void setCurrentCals(int cc) {
+    _currentCals = cc;
+  }
+
+  //Getters
+  String getUserName() {
+    return _userName;
+  }
+
+  String getEmail() {
+    return _email;
+  }
+
+  String getUserImage() {
+    return _userImage;
+  }
+
+  int getDailyCals() {
+    return _dailyCals;
+  }
+
+  int getCurrentCals() {
+    return _currentCals;
+  }
+
+}
+
+/// Database User's structure
+enum dbUser {
+  name,
+  email,
+  image,
+  dailyCal,
+  currentCal
+}
+
+///Associations Key and Values
+extension NamesExtension on dbUser {
+  String get text {
+    switch (this) {
+      case dbUser.name:
+        return 'userName';
+      case dbUser.email:
+        return 'userEmail';
+      case dbUser.image:
+        return 'userImage';
+      case dbUser.currentCal:
+        return 'userCurrentCal';
+      case dbUser.dailyCal:
+        return 'userDailyCal';
+      default:
+        return '';
+    }
   }
 }

@@ -10,11 +10,10 @@ void main() async {
   runApp(MaterialApp(
     home: const Home(),
     theme: ThemeData(
-      //Define the default colors
-      primaryColor: Colors.blue.shade900,
-      splashColor: Colors.red,
-      highlightColor: Colors.black.withOpacity(0.4),
-      visualDensity: VisualDensity.adaptivePlatformDensity,
+
+      //Define splash effects colors
+      splashColor: Colors.blueAccent.shade100,
+      highlightColor: Colors.black.withOpacity(0.1),
 
       //Define the default text styling for headlines, titles, bodies of text, and more.
       textTheme: const TextTheme(
@@ -56,6 +55,14 @@ void main() async {
         ),
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
       ),
+
+      //Define AppBar Style
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.blue.shade900,
+        centerTitle: true,
+        toolbarTextStyle: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+
     ),
     debugShowCheckedModeBanner: false,
   ));
@@ -68,49 +75,50 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade900,
+        backgroundColor: Colors.blue.shade900,
         body: SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                'NearCals',
-                style: Theme.of(context).textTheme.headline2,
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'NearCals',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              child: Image.asset('resources/logo.png'),
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RegScreen())),
-                  child: const Text('Sign Up'),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: Image.asset('resources/logo.png'),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                 ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen())),
-                  child: const Text('Log In'),
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegScreen())),
+                      child: const Text('Sign Up'),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen())),
+                      child: const Text('Log In'),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }

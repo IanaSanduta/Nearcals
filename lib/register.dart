@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nearcals/classes/utility.dart';
+import 'classes/dataBase.dart';
+import 'classes/userClass.dart';
 import 'home_page.dart';
-import 'net/userSetup.dart';
-
-String run = '';
 
 class RegScreen extends StatefulWidget {
   const RegScreen({Key? key}) : super(key: key);
@@ -14,8 +13,8 @@ class RegScreen extends StatefulWidget {
 class _RegScreenState extends State<RegScreen> {
   //Define variables
   var _isObscure = true;
-  var _password1 = '';
-  var _password2 = '';
+  var _password = '';
+  var _confirmPassword = '';
   final _formKey = GlobalKey<FormState>();
 
   //Define Firebase variables
@@ -32,8 +31,8 @@ class _RegScreenState extends State<RegScreen> {
     var val = value.toString().trim();
     if (val.isEmpty) {
       return "This field is required";
-    } else if (val.length < 4) {
-      return "Username must be at least 4 characters";
+    } else if (val.length < 3) {
+      return "Username must be at least 3 characters";
     } else if (val.length > 20) {
       return ''' Username must not be greater than
        20 characters''';
@@ -68,15 +67,15 @@ class _RegScreenState extends State<RegScreen> {
     }
 
     if (!RegExp(
-            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,20}$')
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,20}$')
         .hasMatch(value)) {
       return ''' Password must be at least 8 character, 
       and at least 1 uppercase, 1 lowercase, 
       1 number, and 1 symbol.''';
     }
 
-    var pass1 = _password1.toString().trim();
-    var pass2 = _password2.toString().trim();
+    var pass1 = _password.toString().trim();
+    var pass2 = _confirmPassword.toString().trim();
 
     if (pass1 != pass2) {
       return "Please make sure your passwords match";
@@ -86,35 +85,37 @@ class _RegScreenState extends State<RegScreen> {
   }
 
   //Define authentication method
-  void authSignUp() async {
+  void authSignUp()  {
     if (_formKey.currentState!.validate()) {
-      try {
-        //Send the login request to the API
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: regEmailController.text.trim(),
-          password: regPassController.text.trim(),
-        );
+        DataBase db = DataBase();
+        var credential = db.createUser(regEmailController.text.trim(), regPassController.text.trim());
 
-        //Check if the user has logged in correctly
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user != null) {
-          run = regUsernameController.text.trim();
-          firebaseUserSetup(regUsernameController.text.trim(),
-              regEmailController.text.trim(), regPassController.text.trim());
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const HomePage()));
-        } else {
-          setState(() {});
-        }
-      } on FirebaseAuthException catch (error) {
-        //Shows a message in case of error.
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(error.message!),
-              duration: const Duration(seconds: 3),
-              backgroundColor: Colors.red.shade900),
-        );
-      }
+        //Create new user on Firebase
+        credential.then((createUser) {
+            // Check if the user has been created
+            if (createUser != null) {
+              //Set variable map
+              var userData = {
+                dbUser.name.text: regUsernameController.text.trim(),
+                dbUser.email.text: regEmailController.text.trim(),
+                dbUser.image.text: 'Image',
+                dbUser.dailyCal.text: 2000,
+                dbUser.currentCal.text: 2000,
+              };
+
+              //Add data to UserData collection
+              db.setCollection('UserData', userData);
+              var user = UserProfile.useMap(userData);
+
+              //Redirection to the next page
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(account: user)));
+            }
+        });
+
+        //Handle firebase exceptions
+        credential.catchError((error){
+            Utility.showMessage(context, error.message);
+        });
     }
   }
 
@@ -198,7 +199,7 @@ class _RegScreenState extends State<RegScreen> {
                         ),
                         suffixIcon: iconObscure,
                       ),
-                      onChanged: (value) => _password1 = value,
+                      onChanged: (value) => _password = value,
                     ),
                     const SizedBox(
                       height: 24.0,
@@ -215,7 +216,7 @@ class _RegScreenState extends State<RegScreen> {
                         ),
                         suffixIcon: iconObscure,
                       ),
-                      onChanged: (value) => _password2 = value,
+                      onChanged: (value) => _confirmPassword = value,
                     ),
                     const SizedBox(
                       height: 30.0,

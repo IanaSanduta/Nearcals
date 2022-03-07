@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'classes/dataBase.dart';
+import 'classes/userClass.dart';
+import 'classes/utility.dart';
 import 'home_page.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,39 +11,40 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   //Define variables
   bool _isObscure = true;
-  final loginEmailController = TextEditingController()
-    ..text = "admin@gmail.com";
-  final loginPassController = TextEditingController()..text = "123456";
+  final loginEmailController = TextEditingController()..text = "admin@gmail.com";
+  final loginPassController = TextEditingController()..text = "passWord1";
 
-  //Define authentication function
-  void authLongIn() async {
-    try {
-      //Send the login request to the API
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: loginEmailController.text.trim(),
-        password: loginPassController.text.trim(),
-      );
+  //Define Authentication method
+  void authLongIn() {
+      DataBase db = DataBase();
+      var credential = db.longIn(loginEmailController.text, loginPassController.text);
 
-      //Check if the user has logged in correctly
-      User? user = FirebaseAuth.instance.currentUser;
+      //Login to firebase
+      credential.then((login){
+          //Check if the user has logged in correctly
+          if(login != null) {
+              db.getCollection('UserData').then((data) {
+                //Create User Object and add data
+                UserProfile user = UserProfile();
+                user.setUserName(data[dbUser.name.text]);
+                user.setEmail(data[dbUser.email.text]);
+                user.setUserImage(data[dbUser.image.text]);
+                user.setCurrentCals(data[dbUser.currentCal.text]);
+                user.setDailyCals(data[dbUser.dailyCal.text]);
 
-      if (user != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
-      } else {
-        setState(() {});
-      }
-    } on FirebaseAuthException catch (error) {
-      //Shows a message in case of error.
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(error.message!),
-            duration: const Duration(seconds: 3),
-            backgroundColor: Colors.red.shade900),
-      );
-    }
+                //Redirection to the next page
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(account: user)));
+              });
+          }
+      });
+
+      //Handle firebase exceptions
+      credential.catchError((error){
+        Utility.showMessage(context, error.message);
+      });
   }
 
   @override
@@ -118,4 +121,5 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
 }

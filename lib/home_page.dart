@@ -1,40 +1,39 @@
-// ignore_for_file: avoid_print
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nearcals/net/userData.dart';
-import 'package:nearcals/profile.dart';
-import 'package:nearcals/register.dart';
+import 'classes/userClass.dart';
+import 'classes/dataBase.dart';
+import 'profile.dart';
 import 'main.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+
+  //Add User Class parameter to constructor
+  final UserProfile account;
+  const HomePage({Key? key, required this.account}) : super(key: key) ;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  //Define authentication function
-
-  void authLongOut() async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Home()));
-  }
 
   @override
   Widget build(BuildContext context) {
-    pullUserData();
-    String? userName = currentUser.getUserName();
-    String? userEmail = currentUser.getEmail();
-    userName ??= FirebaseAuth.instance.currentUser?.displayName;
-    userEmail ??= FirebaseAuth.instance.currentUser?.email;
-    userName ??= run;
-    return MaterialApp(
-      home: Scaffold(
+
+    //Retrieve login data
+    UserProfile userData = widget.account;
+    String userName = userData.getUserName();
+    String userEmail = userData.getEmail();
+    debugPrint(userData.toString());
+
+    //Logout function
+    void authLongOut() {
+      DataBase().longOut();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+    }
+
+    return Scaffold(
         appBar: AppBar(
           title: const Text('Home'),
-          backgroundColor: Theme.of(context).primaryColor,
         ),
         drawer: Drawer(
           child: ListView(
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               UserAccountsDrawerHeader(
                 accountName: Text(userName),
-                accountEmail: Text(userEmail!),
+                accountEmail: Text(userEmail),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.asset(
@@ -55,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 decoration: BoxDecoration(
                   color: Colors.blue.shade900,
-                  //image: const DecorationImage(image: AssetImage('resources/drawer.jpg'), fit: BoxFit.cover),
+                  image: const DecorationImage(image: AssetImage('resources/drawer.jpg'), fit: BoxFit.cover),
                 ),
               ),
               ListTile(
@@ -108,7 +107,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
     );
   }
+
 }
