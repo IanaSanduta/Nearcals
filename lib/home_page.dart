@@ -3,6 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
+import 'package:nearcals/maps.dart';
+import 'package:nearcals/net/userData.dart';
 import 'package:nearcals/profile.dart';
 import 'package:nearcals/register.dart';
 import 'main.dart';
@@ -71,7 +73,10 @@ class _HomePageState extends State<HomePage> {
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.map),
                 title: const Text('Map'),
-                onTap: () => print('map'),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Maps()),
+                ),
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
