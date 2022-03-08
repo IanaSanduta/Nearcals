@@ -22,7 +22,7 @@ class UserClass {
   String? userImage = 'ui';
   int? dailyCals = 0;
   int? currentCals = 0;
-  Map<String, String>? favoritesList = {'Key': 'Data'};
+  Map<String, String>? favoritesList = {};
 
   UserClass(
       String un, String e, String ui, int dc, int cc, Map<String, String> map,

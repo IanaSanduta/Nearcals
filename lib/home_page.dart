@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     pullUserData();
+    //currentUser.addFavoritesList('lemon', 'lime');
     //currentUser.removeFavoritesList('Key');
     //currentUser.removeFavoritesList('lemon');
     String? userName = currentUser.getUserName();
