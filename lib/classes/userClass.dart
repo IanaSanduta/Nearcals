@@ -33,38 +33,38 @@ class UserClass {
       this.currentCals,
       this.favoritesList});
 
-  //Pull Requests used by backend to update from the Database
-  // PROGRAMER//
+  // Pull Requests used by backend to update from the Database
+  // ATTENTION PROGRAMER //
   // Use currentUser.setUserName(String un) instead of pull functions.
   void pullUserName(String un) {
     username = un;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setEmail(String e) instead of pull functions.
   void pullEmail(String e) {
     email = e;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setUserImage(String im) instead of pull functions.
   void pullUserImage(String im) {
     userImage = im;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setDailyCals(int dc) instead of pull functions.
   void pullDailyCals(int dc) {
     dailyCals = dc;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setCurrentCals(int cc) instead of pull functions.
   void pullCurrentCals(int cc) {
     currentCals = cc;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setFavoriteList(int cc) instead of pull functions.
   void pullFavoritesList(Map fl) {
     favoritesList = fl.cast<String, String>();
@@ -99,12 +99,12 @@ class UserClass {
     return currentCals;
   }
 
-  //currentUser.getFavoriteList() will return a map of the entire favorite list
+  // currentUser.getFavoriteList() will return a map of the entire favorite list
   Map? getFavoriteList() {
     return favoritesList;
   }
 
-  //SETS//
+  // SETS //
   // sets used by programmers to set and update the database.
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setUserName(String un) {
@@ -202,7 +202,7 @@ Future<void> pullUserData() async {
   print(currentUser.getFavoriteList());
 }
 
-// checkUserData Used to check all the values in currentUser class
+// checkUserData Used to check all the values in currentUser class (not really used)
 void checkUserData() {
   print('Check User Data');
   print(currentUser.getUserName());
