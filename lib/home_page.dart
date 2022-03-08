@@ -2,8 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/maps.dart';
-import 'package:nearcals/net/userData.dart';
 import 'package:nearcals/profile.dart';
 import 'package:nearcals/register.dart';
 import 'Calories.dart';
@@ -18,8 +18,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //Define authentication function
 
-  void authLongOut() async {
-    await FirebaseAuth.instance.signOut();
+  void authLongOut() {
+    currentUser.clearUser();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Home()));
   }
