@@ -22,7 +22,7 @@ Future<void> firebaseUserSetup(
       'userDailyCal': defaultCal,
       'userCurrentCal': defaultCal,
       'userImage': defaultUserImage,
-      'favoriteList': favoritesList
+      'favoritesList': favoritesList
     });
   });
 

@@ -161,6 +161,7 @@ class UserClass {
     dailyCals = null;
     currentCals = null;
     uID = '';
+    favoritesList?.clear();
     await FirebaseAuth.instance.signOut();
   }
 }
