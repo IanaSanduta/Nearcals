@@ -22,6 +22,7 @@ class FoodApi {
     for (var i in data['hits']) {
       _temp.add(i['fields']);
     }
+    print(_temp.length);
 
     return Food.caloriesFromSnapshot(_temp);
   }

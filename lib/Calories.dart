@@ -40,7 +40,9 @@ class _CaloriesState extends State<Calories> {
         ),
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(itemBuilder: (context, index) {
+            : ListView.builder(
+            itemCount: _foodlist.length,
+            itemBuilder: (context, index) {
           return RecipeCard(
               name: _foodlist[index].name,
               calories: _foodlist[index].calories,
