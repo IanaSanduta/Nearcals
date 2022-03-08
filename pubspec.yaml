@@ -53,10 +53,6 @@ dependencies:
   google_maps_flutter: ^2.1.2
   geolocator: ^8.2.0
 
-  # Google Maps Services
-  google_maps_webservice: ^0.0.19
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
