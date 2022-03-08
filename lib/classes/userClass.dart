@@ -140,7 +140,7 @@ class UserClass {
 
   // TODO: Needs to be tested when we have the UI for it (probably doesnt work)
   // currentUser.addFavoritesList(String key, String value) should add a value from the favorites list map
-  void addFavoritesList(String key, String favData) {
+  void addFav(String key, String favData) {
     var newFav = <String, String>{key: favData};
     favoritesList?.addEntries(newFav.entries);
     db.doc(uID).update({dbList[5]: favoritesList});
@@ -148,7 +148,7 @@ class UserClass {
 
   // TODO: Needs to be tested when we have the UI for it (probably doesnt work)
   // currentUser.addFavoritesList(String key, String value) should remove a value from the favorites list map
-  void removeFavoritesList(String key) {
+  void removeFavList(String key) {
     favoritesList?.remove(key);
     db.doc(uID).update({dbList[5]: favoritesList});
   }
