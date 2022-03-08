@@ -83,8 +83,8 @@ class UserClass {
     return email;
   }
 
+  // TODO: need to implement image storage in firestore
   // currentUser.getUserImage() will return a String of the stored User Image for the current user cause these just set local variables not the database
-  //TODO: need to implement image storage in firestore
   String? getUserImage() {
     return userImage;
   }
@@ -158,6 +158,7 @@ class UserClass {
     userImage = null;
     dailyCals = null;
     currentCals = null;
+    favoritesList?.clear();
     uID = '';
     await FirebaseAuth.instance.signOut();
   }
@@ -168,6 +169,12 @@ Future<void> pullUserData() async {
   uID = FirebaseAuth.instance.currentUser!.uid;
   DocumentSnapshot snapshot = await db.doc(uID).get();
   var data = snapshot.data() as Map;
+  currentUser.username = null;
+  currentUser.email = null;
+  currentUser.userImage = null;
+  currentUser.dailyCals = null;
+  currentUser.currentCals = null;
+  currentUser.favoritesList?.clear();
 
   while (currentUser.getUserName() == null) {
     currentUser.pullUserName(data[dbList[0]] as String);
