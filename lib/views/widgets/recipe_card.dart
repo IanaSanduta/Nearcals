@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
   final String name;
-  final String calories;
+  final int calories;
   final String brandName;
   const RecipeCard({
     required this.name,
@@ -69,7 +69,7 @@ class RecipeCard extends StatelessWidget {
                         size: 18,
                       ),
                       const SizedBox(width: 7),
-                      Text(calories),
+                      Text(calories.toString()),
                     ],
                   ),
                 ),

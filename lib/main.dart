@@ -1,3 +1,6 @@
+// ignore_for_file: avoid_print
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
@@ -6,6 +9,7 @@ import 'register.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  print(FirebaseAuth.instance.currentUser?.uid);
 
   runApp(MaterialApp(
     home: const Home(),
@@ -68,49 +72,50 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade900,
+        backgroundColor: Colors.blue.shade900,
         body: SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                'NearCals',
-                style: Theme.of(context).textTheme.headline2,
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'NearCals',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              child: Image.asset('resources/logo.png'),
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RegScreen())),
-                  child: const Text('Sign Up'),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: Image.asset('resources/logo.png'),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                 ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen())),
-                  child: const Text('Log In'),
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegScreen())),
+                      child: const Text('Sign Up'),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen())),
+                      child: const Text('Log In'),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }
