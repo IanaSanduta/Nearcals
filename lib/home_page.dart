@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
+import 'package:nearcals/favorites.dart';
 import 'package:nearcals/maps.dart';
 import 'package:nearcals/profile.dart';
 import 'package:nearcals/register.dart';
@@ -26,9 +27,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     pullUserData();
-    //currentUser.addFavoritesList('lemon', 'lime');
-    //currentUser.removeFavoritesList('Key');
-    //currentUser.removeFavoritesList('lemon');
     String? userName = currentUser.getUserName();
     String? userEmail = currentUser.getEmail();
     userName ??= FirebaseAuth.instance.currentUser?.displayName;
@@ -93,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.favorite),
                 title: const Text('Favorites'),
-                onTap: () => print('favorite'),
+                onTap: () => favListTest(),
               ),
               const Divider(),
               ListTile(

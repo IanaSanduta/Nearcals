@@ -142,7 +142,7 @@ class UserClass {
   // currentUser.addFavoritesList(String key, String value) should add a value from the favorites list map
   void addFavoritesList(String key, String favData) {
     var newFav = <String, String>{key: favData};
-    favoritesList?.addAll(newFav);
+    favoritesList?.addEntries(newFav.entries);
     db.doc(uID).update({dbList[5]: favoritesList});
   }
 
@@ -161,7 +161,6 @@ class UserClass {
     dailyCals = null;
     currentCals = null;
     uID = '';
-    favoritesList?.clear();
     await FirebaseAuth.instance.signOut();
   }
 }
