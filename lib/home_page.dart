@@ -3,9 +3,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
+import 'package:nearcals/favorites.dart';
 import 'package:nearcals/maps.dart';
 import 'package:nearcals/profile.dart';
 import 'package:nearcals/register.dart';
+import 'Calories.dart';
 import 'main.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //Define authentication function
-
   void authLongOut() {
     currentUser.clearUser();
     Navigator.push(
@@ -25,6 +26,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // This is where the data from the server is pulled from here on in you are working with local variables.
+    // However when you change a local variable with the currentUser.set....() class function it updates the server for next login.
     pullUserData();
     String? userName = currentUser.getUserName();
     String? userEmail = currentUser.getEmail();
@@ -81,13 +84,16 @@ class _HomePageState extends State<HomePage> {
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.local_dining),
                 title: const Text('Calories'),
-                onTap: () => print('calories'),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Calories()),
+                ),
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.favorite),
                 title: const Text('Favorites'),
-                onTap: () => print('favorite'),
+                onTap: () => favListTest(),
               ),
               const Divider(),
               ListTile(

@@ -1,18 +1,19 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:nearcals/models/food.api.dart';
-import 'package:nearcals/models/food.dart';
 import 'package:nearcals/views/widgets/recipe_card.dart';
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+import 'models/food.api.dart';
+import 'models/food.dart';
+
+class Calories extends StatefulWidget {
+  const Calories({Key? key}) : super(key: key);
 
   @override
-  _WelcomePageState createState() => _WelcomePageState();
+  _CaloriesState createState() => _CaloriesState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
+class _CaloriesState extends State<Calories> {
   late List<Food> _foodlist;
   bool _isLoading = true;
 
@@ -33,14 +34,9 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.restaurant_menu),
-              SizedBox(width: 10),
-              Text('NearCals'),
-            ],
-          ),
+          leading: const Icon(Icons.local_dining),
+          title: const Text('Calories'),
+          backgroundColor: Theme.of(context).primaryColor,
         ),
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())
@@ -51,4 +47,13 @@ class _WelcomePageState extends State<WelcomePage> {
                     brandName: _foodlist[index].brandName);
               }));
   }
+  /*
+  @override
+
+  Widget build(BuildContext context) {
+    return Container();
+  }
+
+   */
+
 }

@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-UserClass currentUser = UserClass('', '', '', 0, 0);
+UserClass currentUser = UserClass('', '', '', 0, 0, {});
 String uID = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference db = FirebaseFirestore.instance.collection('UserData');
 
@@ -12,7 +12,8 @@ final List dbList = [
   'userDailyCal',
   'userCurrentCal',
   'userEmail',
-  'userImage'
+  'userImage',
+  'favoritesList'
 ];
 
 class UserClass {
@@ -21,43 +22,52 @@ class UserClass {
   String? userImage = 'ui';
   int? dailyCals = 0;
   int? currentCals = 0;
+  Map<String, String>? favoritesList = {};
 
-  UserClass(String un, String e, String ui, int dc, int cc,
+  UserClass(
+      String un, String e, String ui, int dc, int cc, Map<String, String> map,
       {this.username,
       this.email,
       this.userImage,
       this.dailyCals,
-      this.currentCals});
+      this.currentCals,
+      this.favoritesList});
 
-  //Pull Requests used by backend to update from the Database
-  // PROGRAMER//
+  // Pull Requests used by backend to update from the Database
+  // ATTENTION PROGRAMER //
   // Use currentUser.setUserName(String un) instead of pull functions.
   void pullUserName(String un) {
     username = un;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setEmail(String e) instead of pull functions.
   void pullEmail(String e) {
     email = e;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setUserImage(String im) instead of pull functions.
   void pullUserImage(String im) {
     userImage = im;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setDailyCals(int dc) instead of pull functions.
   void pullDailyCals(int dc) {
     dailyCals = dc;
   }
 
-  // PROGRAMER//
+  // ATTENTION PROGRAMER //
   // Use currentUser.setCurrentCals(int cc) instead of pull functions.
   void pullCurrentCals(int cc) {
     currentCals = cc;
+  }
+
+  // ATTENTION PROGRAMER //
+  // Use currentUser.setFavoriteList(int cc) instead of pull functions.
+  void pullFavoritesList(Map fl) {
+    favoritesList = fl.cast<String, String>();
   }
 
   // GETS //
@@ -73,8 +83,8 @@ class UserClass {
     return email;
   }
 
+  // TODO: need to implement image storage in firestore
   // currentUser.getUserImage() will return a String of the stored User Image for the current user cause these just set local variables not the database
-  //TODO: need to implement image storage in firestore
   String? getUserImage() {
     return userImage;
   }
@@ -89,14 +99,18 @@ class UserClass {
     return currentCals;
   }
 
-  //SETS//
+  // currentUser.getFavoriteList() will return a map of the entire favorite list
+  Map? getFavoriteList() {
+    return favoritesList;
+  }
+
+  // SETS //
   // sets used by programmers to set and update the database.
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setUserName(String un) {
     db.doc(uID).update({dbList[0]: un});
     FirebaseAuth.instance.currentUser?.updateDisplayName(un);
     currentUser.pullUserName(un);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
@@ -104,28 +118,37 @@ class UserClass {
     db.doc(uID).update({dbList[3]: e});
     FirebaseAuth.instance.currentUser?.updateEmail(e);
     currentUser.pullEmail(e);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setCurrentCals(int cc) {
     db.doc(uID).update({dbList[2]: cc});
     currentUser.pullCurrentCals(cc);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setDailyCals(int dc) {
     db.doc(uID).update({dbList[1]: dc});
     currentUser.pullDailyCals(dc);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setUserImage(String im) {
     db.doc(uID).update({dbList[4]: im});
     currentUser.pullUserImage(im);
-    pullUserData();
+  }
+
+  // currentUser.addFavoritesList(String key, String value) should add a value from the favorites list map
+  void addFavList(String key, String favData) {
+    var newFav = <String, String>{key: favData};
+    favoritesList?.addEntries(newFav.entries);
+    db.doc(uID).update({dbList[5]: favoritesList});
+  }
+
+  // currentUser.addFavoritesList(String key, String value) should remove a value from the favorites list map
+  void removeFavList(String key) {
+    favoritesList?.remove(key);
+    db.doc(uID).update({dbList[5]: favoritesList});
   }
 
   // currentUser.clearUser() used by the prgram to clear all user values and sign out
@@ -135,6 +158,7 @@ class UserClass {
     userImage = null;
     dailyCals = null;
     currentCals = null;
+    favoritesList?.clear();
     uID = '';
     await FirebaseAuth.instance.signOut();
   }
@@ -145,6 +169,12 @@ Future<void> pullUserData() async {
   uID = FirebaseAuth.instance.currentUser!.uid;
   DocumentSnapshot snapshot = await db.doc(uID).get();
   var data = snapshot.data() as Map;
+  currentUser.username = null;
+  currentUser.email = null;
+  currentUser.userImage = null;
+  currentUser.dailyCals = null;
+  currentUser.currentCals = null;
+  currentUser.favoritesList?.clear();
 
   while (currentUser.getUserName() == null) {
     currentUser.pullUserName(data[dbList[0]] as String);
@@ -166,9 +196,13 @@ Future<void> pullUserData() async {
     currentUser.pullUserImage(data[dbList[4]] as String);
   }
   print(currentUser.getUserImage());
+  while (currentUser.getFavoriteList() == null) {
+    currentUser.pullFavoritesList(data[dbList[5]] as Map);
+  }
+  print(currentUser.getFavoriteList());
 }
 
-// checkUserData Used to check all the values in currentUser class
+// checkUserData Used to check all the values in currentUser class (not really used)
 void checkUserData() {
   print('Check User Data');
   print(currentUser.getUserName());
@@ -176,4 +210,5 @@ void checkUserData() {
   print(currentUser.getDailyCals());
   print(currentUser.getCurrentCals());
   print(currentUser.getUserImage());
+  print(currentUser.getFavoriteList());
 }

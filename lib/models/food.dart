@@ -1,7 +1,7 @@
 class Food {
   final String name;
   final String brandName;
-  final String calories;
+  final int calories;
 
   Food({required this.name, required this.brandName, required this.calories});
 
@@ -9,7 +9,7 @@ class Food {
     return Food(
         name: json['item_name'] as String,
         brandName: json['brand_name'] as String,
-        calories: json['nf_calories'] as String);
+        calories: json['nf_calories'] as int);
   }
 
   static List<Food> caloriesFromSnapshot(List snapshot) {
