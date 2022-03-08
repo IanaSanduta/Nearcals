@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:nearcals/views/widgets/recipe_card.dart';
 
@@ -13,7 +14,6 @@ class Calories extends StatefulWidget {
 }
 
 class _CaloriesState extends State<Calories> {
-
   late List<Food> _foodlist;
   bool _isLoading = true;
 
@@ -40,14 +40,12 @@ class _CaloriesState extends State<Calories> {
         ),
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(
-            itemCount: _foodlist.length,
-            itemBuilder: (context, index) {
-          return RecipeCard(
-              name: _foodlist[index].name,
-              calories: _foodlist[index].calories,
-              brandName: _foodlist[index].brandName);
-        }));
+            : ListView.builder(itemBuilder: (context, index) {
+                return RecipeCard(
+                    name: _foodlist[index].name,
+                    calories: _foodlist[index].calories,
+                    brandName: _foodlist[index].brandName);
+              }));
   }
   /*
   @override

@@ -9,6 +9,7 @@ Future<void> firebaseUserSetup(
   auth.currentUser!.updateDisplayName(userName);
   int defaultCal = 2000;
   String defaultUserImage = 'Hello World';
+  Map<String, String> favoritesList = {'Key': 'Data'};
 
   CollectionReference userProfile =
       FirebaseFirestore.instance.collection('UserData');
@@ -20,7 +21,8 @@ Future<void> firebaseUserSetup(
       'userEmail': userEmail,
       'userDailyCal': defaultCal,
       'userCurrentCal': defaultCal,
-      'userImage': defaultUserImage
+      'userImage': defaultUserImage,
+      'favoriteList': favoritesList
     });
   });
 

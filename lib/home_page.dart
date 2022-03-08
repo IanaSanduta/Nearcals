@@ -17,7 +17,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //Define authentication function
-
   void authLongOut() {
     currentUser.clearUser();
     Navigator.push(
@@ -82,8 +81,10 @@ class _HomePageState extends State<HomePage> {
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.local_dining),
                 title: const Text('Calories'),
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Calories()),
-              ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Calories()),
+                ),
               ),
               ListTile(
                 iconColor: Colors.blue.shade900,

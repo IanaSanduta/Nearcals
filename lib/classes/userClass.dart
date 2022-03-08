@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-UserClass currentUser = UserClass('', '', '', 0, 0);
+UserClass currentUser = UserClass('', '', '', 0, 0, {});
 String uID = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference db = FirebaseFirestore.instance.collection('UserData');
 
@@ -12,7 +12,8 @@ final List dbList = [
   'userDailyCal',
   'userCurrentCal',
   'userEmail',
-  'userImage'
+  'userImage',
+  'favoritesList'
 ];
 
 class UserClass {
@@ -21,13 +22,16 @@ class UserClass {
   String? userImage = 'ui';
   int? dailyCals = 0;
   int? currentCals = 0;
+  Map<String, String>? favoritesList = {'Key': 'Data'};
 
-  UserClass(String un, String e, String ui, int dc, int cc,
+  UserClass(
+      String un, String e, String ui, int dc, int cc, Map<String, String> map,
       {this.username,
       this.email,
       this.userImage,
       this.dailyCals,
-      this.currentCals});
+      this.currentCals,
+      this.favoritesList});
 
   //Pull Requests used by backend to update from the Database
   // PROGRAMER//
@@ -60,6 +64,12 @@ class UserClass {
     currentCals = cc;
   }
 
+  // PROGRAMER//
+  // Use currentUser.setFavoriteList(int cc) instead of pull functions.
+  void pullFavoritesList(Map fl) {
+    favoritesList = fl.cast<String, String>();
+  }
+
   // GETS //
   // get requests used by programers to get specific values from currentUser
 
@@ -89,6 +99,11 @@ class UserClass {
     return currentCals;
   }
 
+  //currentUser.getFavoriteList() will return a map of the entire favorite list
+  Map? getFavoriteList() {
+    return favoritesList;
+  }
+
   //SETS//
   // sets used by programmers to set and update the database.
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
@@ -96,7 +111,6 @@ class UserClass {
     db.doc(uID).update({dbList[0]: un});
     FirebaseAuth.instance.currentUser?.updateDisplayName(un);
     currentUser.pullUserName(un);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
@@ -104,28 +118,39 @@ class UserClass {
     db.doc(uID).update({dbList[3]: e});
     FirebaseAuth.instance.currentUser?.updateEmail(e);
     currentUser.pullEmail(e);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setCurrentCals(int cc) {
     db.doc(uID).update({dbList[2]: cc});
     currentUser.pullCurrentCals(cc);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setDailyCals(int dc) {
     db.doc(uID).update({dbList[1]: dc});
     currentUser.pullDailyCals(dc);
-    pullUserData();
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   void setUserImage(String im) {
     db.doc(uID).update({dbList[4]: im});
     currentUser.pullUserImage(im);
-    pullUserData();
+  }
+
+  // TODO: Needs to be tested when we have the UI for it (probably doesnt work)
+  // currentUser.addFavoritesList(String key, String value) should add a value from the favorites list map
+  void addFavoritesList(String key, String favData) {
+    var newFav = <String, String>{key: favData};
+    favoritesList?.addAll(newFav);
+    db.doc(uID).update({dbList[5]: favoritesList});
+  }
+
+  // TODO: Needs to be tested when we have the UI for it (probably doesnt work)
+  // currentUser.addFavoritesList(String key, String value) should remove a value from the favorites list map
+  void removeFavoritesList(String key) {
+    favoritesList?.remove(key);
+    db.doc(uID).update({dbList[5]: favoritesList});
   }
 
   // currentUser.clearUser() used by the prgram to clear all user values and sign out
@@ -166,6 +191,10 @@ Future<void> pullUserData() async {
     currentUser.pullUserImage(data[dbList[4]] as String);
   }
   print(currentUser.getUserImage());
+  while (currentUser.getFavoriteList() == null) {
+    currentUser.pullFavoritesList(data[dbList[5]] as Map);
+  }
+  print(currentUser.getFavoriteList());
 }
 
 // checkUserData Used to check all the values in currentUser class
@@ -176,4 +205,5 @@ void checkUserData() {
   print(currentUser.getDailyCals());
   print(currentUser.getCurrentCals());
   print(currentUser.getUserImage());
+  print(currentUser.getFavoriteList());
 }
