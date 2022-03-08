@@ -26,6 +26,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     pullUserData();
+    currentUser.removeFavoritesList('Key');
+    currentUser.removeFavoritesList('lemon');
     String? userName = currentUser.getUserName();
     String? userEmail = currentUser.getEmail();
     userName ??= FirebaseAuth.instance.currentUser?.displayName;
