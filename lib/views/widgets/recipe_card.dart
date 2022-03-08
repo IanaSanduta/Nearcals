@@ -6,12 +6,13 @@ class RecipeCard extends StatelessWidget {
   final String name;
   final int calories;
   final String brandName;
+
   const RecipeCard({
     required this.name,
-    //required this.cookTime,
     required this.calories,
     required this.brandName,
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +20,7 @@ class RecipeCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 180,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.yellow,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -63,11 +64,6 @@ class RecipeCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.yellow,
-                        size: 18,
-                      ),
                       const SizedBox(width: 7),
                       Text(calories.toString()),
                     ],
@@ -82,11 +78,6 @@ class RecipeCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: const [
-                      Icon(
-                        Icons.schedule,
-                        color: Colors.yellow,
-                        size: 18,
-                      ),
                       SizedBox(width: 7),
                       //Text(cookTime),
                     ],
