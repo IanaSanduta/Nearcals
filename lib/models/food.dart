@@ -3,6 +3,8 @@ class Food {
   final String brandName;
   final int calories;
 
+  String getname() => name;
+
   Food({required this.name, required this.brandName, required this.calories});
 
   factory Food.fromJson(dynamic json) {
