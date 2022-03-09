@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 
+import 'package:nearcals/classes/userClass.dart';
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -18,7 +20,15 @@ class _ProfileState extends State<Profile> {
   File? fileImg;
 
   @override
+  void initState() {
+    print('user-eamil');
+    print(currentUser.getEmail());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(currentUser.getUserName());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
