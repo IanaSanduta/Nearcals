@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+//import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nearcals/views/widgets/recipe_card.dart';
@@ -17,7 +17,7 @@ class _CaloriesState extends State<Calories> {
 
   late List<Food> _foodlist;
   bool _isLoading = true;
-
+/*
   final TextEditingController _filter = new TextEditingController();
   final dio = new Dio(); // for http requests
   String _searchText = "";
@@ -25,7 +25,7 @@ class _CaloriesState extends State<Calories> {
   List filteredNames = []; // names filtered by search text
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text( 'Search Example' );
-
+ */
   @override
   void initState() {
     super.initState();

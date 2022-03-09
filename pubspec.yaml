@@ -54,7 +54,7 @@ dependencies:
   geolocator: ^8.2.0
 
   #for http requests
-  dio: 1.0.0
+  #dio: 1.0.0
 
 
 dev_dependencies:
