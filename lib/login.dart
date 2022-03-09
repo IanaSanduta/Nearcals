@@ -11,9 +11,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //Define variables
   bool _isObscure = true;
-  final loginEmailController = TextEditingController()
-    ..text = "jnope25@gmail.com";
-  final loginPassController = TextEditingController()..text = "Password@1";
+  final loginEmailController = TextEditingController()..text = "admin@gmail.com";
+  final loginPassController = TextEditingController()..text = "Password1";
 
   //Define authentication function
   void authLongIn() async {

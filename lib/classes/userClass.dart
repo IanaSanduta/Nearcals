@@ -1,5 +1,3 @@
-// ignore_for_file: file_names, avoid_print
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -27,11 +25,11 @@ class UserClass {
   UserClass(
       String un, String e, String ui, int dc, int cc, Map<String, String> map,
       {this.username,
-      this.email,
-      this.userImage,
-      this.dailyCals,
-      this.currentCals,
-      this.favoritesList});
+        this.email,
+        this.userImage,
+        this.dailyCals,
+        this.currentCals,
+        this.favoritesList});
 
   // Pull Requests used by backend to update from the Database
   // ATTENTION PROGRAMER //

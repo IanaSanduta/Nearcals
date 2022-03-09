@@ -19,11 +19,9 @@ class _MyAppState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text('Foodie Map'),
-          backgroundColor: Colors.blue.shade900,
         ),
         body: GoogleMap(
           onMapCreated: _onMapCreated,
@@ -32,7 +30,6 @@ class _MyAppState extends State<Maps> {
             zoom: 11.0,
           ),
         ),
-      ),
     );
   }
 }
