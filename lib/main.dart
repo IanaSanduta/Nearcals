@@ -14,11 +14,9 @@ void main() async {
   runApp(MaterialApp(
     home: const Home(),
     theme: ThemeData(
-      //Define the default colors
-      primaryColor: Colors.blue.shade900,
-      splashColor: Colors.red,
-      highlightColor: Colors.black.withOpacity(0.4),
-      visualDensity: VisualDensity.adaptivePlatformDensity,
+      //Define splash effects colors
+      splashColor: Colors.blueAccent.shade100,
+      highlightColor: Colors.black.withOpacity(0.1),
 
       //Define the default text styling for headlines, titles, bodies of text, and more.
       textTheme: const TextTheme(
@@ -33,14 +31,14 @@ void main() async {
       //Define the default Elevated Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-        primary: Colors.white,
-        onPrimary: Colors.blue,
-        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
-        shape:
+            primary: Colors.white,
+            onPrimary: Colors.blue,
+            textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        minimumSize: const Size(200, 42),
-      )),
+            minimumSize: const Size(200, 42),
+          )),
 
       //Define the default InputDecoration of TextField
       inputDecorationTheme: const InputDecorationTheme(
@@ -59,6 +57,13 @@ void main() async {
           borderRadius: BorderRadius.all(Radius.circular(32.0)),
         ),
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      ),
+
+      //Define AppBar Style
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.blue.shade900,
+        centerTitle: true,
+        toolbarTextStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
     debugShowCheckedModeBanner: false,

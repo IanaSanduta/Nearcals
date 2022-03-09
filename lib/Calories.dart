@@ -44,9 +44,7 @@ class _CaloriesState extends State<Calories> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const Icon(Icons.local_dining),
           title: const Text('Calories'),
-          backgroundColor: Theme.of(context).primaryColor,
         ),
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())

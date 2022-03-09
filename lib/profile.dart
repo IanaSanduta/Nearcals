@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -17,38 +15,97 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  //Define Firebase variables
+  final regUsernameController = TextEditingController();
+  final regEmailController = TextEditingController();
+  final regDailyCalControl = TextEditingController();
+
+  //Define Image variable
   File? fileImg;
 
   @override
   void initState() {
-    print('user-eamil');
-    print(currentUser.getEmail());
+    regUsernameController.text = currentUser.getUserName()!;
+    regEmailController.text = currentUser.getEmail()!;
+    regDailyCalControl.text = currentUser.getDailyCals().toString();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(currentUser.getUserName());
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                Stack(
+    var styleInput = const TextStyle(color: Colors.white);
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: Colors.indigo.shade700,
+        appBar: AppBar(
+          title: const Text('Profile'),
+        ),
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    buildImage(context),
+                    Stack(
+                      children: [
+                        buildImage(context),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    TextField(
+                      controller: regUsernameController,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ),
+                        labelText: 'Username',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    TextField(
+                      controller: regEmailController,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Colors.white,
+                        ),
+                        labelText: 'Email',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    TextField(
+                      controller: regDailyCalControl,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.whatshot,
+                          color: Colors.white,
+                        ),
+                        labelText: 'Daily Calories',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    ElevatedButton(
+                      onPressed: updateProfile,
+                      child: const Text('Save'),
+                    )
                   ],
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -161,7 +218,7 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  //Function to take photo or retrieve photo from gallery
+  ///Function to take photo or retrieve photo from gallery
   Future pickImage(ImageSource source) async {
     try {
       //Get a photo depend on gallery or camera
@@ -177,7 +234,7 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  //Function to edit a photo
+  ///Function to edit a photo
   Future editImage(String imagePath) async {
     // Set crop settings
     final editImg = await ImageCropper().cropImage(
@@ -218,5 +275,18 @@ class _ProfileState extends State<Profile> {
     if (editImg != null) {
       setState(() => fileImg = editImg);
     }
+  }
+
+  ///Function to update information profile
+  void updateProfile() {
+    currentUser.setUserName(regUsernameController.text.trim());
+    currentUser.setEmail(regEmailController.text.trim());
+    currentUser.setDailyCals(int.parse(regDailyCalControl.text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: const Text('Successful Update'),
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.green.shade700),
+    );
   }
 }
