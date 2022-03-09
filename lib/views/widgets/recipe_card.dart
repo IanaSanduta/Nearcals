@@ -42,6 +42,7 @@ class RecipeCard extends StatelessWidget {
               child: Text(
                 name,
                 style: const TextStyle(
+                  color: Colors.white,
                   fontSize: 19,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -59,16 +60,23 @@ class RecipeCard extends StatelessWidget {
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: Colors.white.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
                     children: [
                       const SizedBox(width: 7),
-                      Text(calories.toString()),
+                      Text(
+                          calories.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                      ),
                     ],
                   ),
                 ),
+                /*
                 Container(
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.all(10),
@@ -83,6 +91,7 @@ class RecipeCard extends StatelessWidget {
                     ],
                   ),
                 )
+                */
               ],
             ),
             alignment: Alignment.bottomLeft,

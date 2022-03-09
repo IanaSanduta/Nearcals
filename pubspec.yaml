@@ -50,15 +50,17 @@ dependencies:
 
   #Crop Images
   image_cropper: ^1.5.0
-  
-  # Google Maps Services
-  google_maps_webservice: ^0.0.19
   google_maps_flutter: ^2.1.2
   geolocator: ^8.2.0
+
+  #for http requests
+  dio: 1.0.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
