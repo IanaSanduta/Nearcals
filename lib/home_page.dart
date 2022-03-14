@@ -34,11 +34,9 @@ class _HomePageState extends State<HomePage> {
     userName ??= FirebaseAuth.instance.currentUser?.displayName;
     userEmail ??= FirebaseAuth.instance.currentUser?.email;
     userName ??= run;
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text('Home'),
-          backgroundColor: Theme.of(context).primaryColor,
         ),
         drawer: Drawer(
           child: ListView(
@@ -59,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 decoration: BoxDecoration(
                   color: Colors.blue.shade900,
-                  //image: const DecorationImage(image: AssetImage('resources/drawer.jpg'), fit: BoxFit.cover),
+                  image: const DecorationImage(image: AssetImage('resources/drawer.jpg'), fit: BoxFit.cover),
                 ),
               ),
               ListTile(
@@ -118,7 +116,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
     );
   }
 }
