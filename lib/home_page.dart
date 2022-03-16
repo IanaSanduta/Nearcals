@@ -1,15 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/favorites.dart';
 import 'package:nearcals/maps.dart';
 import 'package:nearcals/profile.dart';
-import 'package:nearcals/register.dart';
 import 'Calories.dart';
 import 'main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -24,14 +25,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This is where the data from the server is pulled from here on in you are working with local variables.
-    // However when you change a local variable with the currentUser.set....() class function it updates the server for next login.
-    pullUserData();
     String? userName = currentUser.getUserName();
     String? userEmail = currentUser.getEmail();
-    userName ??= FirebaseAuth.instance.currentUser?.displayName;
-    userEmail ??= FirebaseAuth.instance.currentUser?.email;
-    userName ??= run;
+    userName ??= 'Username';
+    userEmail ??= 'Email';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -42,7 +39,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             UserAccountsDrawerHeader(
               accountName: Text(userName),
-              accountEmail: Text(userEmail!),
+              accountEmail: Text(userEmail),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
                   child: Image.asset(

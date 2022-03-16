@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'home_page.dart';
+import 'package:nearcals/shared/HomeLoadingPage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,7 +11,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //Define variables
   bool _isObscure = true;
-  final loginEmailController = TextEditingController()..text = "admin@gmail.com";
+  final loginEmailController = TextEditingController()
+    ..text = "admin@gmail.com";
   final loginPassController = TextEditingController()..text = "Password1";
 
   //Define authentication function
@@ -27,8 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
       User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
       } else {
         setState(() {});
       }

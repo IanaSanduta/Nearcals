@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'home_page.dart';
+import 'package:nearcals/shared/HomeLoadingPage.dart';
 import 'net/userSetup.dart';
 
 String run = '';
@@ -67,8 +67,7 @@ class _RegScreenState extends State<RegScreen> {
       return "Passwords are required";
     }
 
-    if (!RegExp(
-            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,20}$')
+    if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,20}$')
         .hasMatch(value)) {
       return ''' Password must be at least 8 character, 
       and at least 1 uppercase, 1 lowercase, 
@@ -102,7 +101,7 @@ class _RegScreenState extends State<RegScreen> {
           firebaseUserSetup(regUsernameController.text.trim(),
               regEmailController.text.trim(), regPassController.text.trim());
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const HomePage()));
+              MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
         } else {
           setState(() {});
         }
