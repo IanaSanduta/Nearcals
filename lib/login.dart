@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nearcals/loadingPage.dart';
+import 'package:nearcals/shared/HomeLoadingPage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (user != null) {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LoadingPage()));
+            MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
       } else {
         setState(() {});
       }

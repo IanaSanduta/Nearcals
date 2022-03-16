@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nearcals/loadingPage.dart';
+import 'package:nearcals/shared/HomeLoadingPage.dart';
 import 'net/userSetup.dart';
 
 String run = '';
@@ -101,7 +101,7 @@ class _RegScreenState extends State<RegScreen> {
           firebaseUserSetup(regUsernameController.text.trim(),
               regEmailController.text.trim(), regPassController.text.trim());
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const LoadingPage()));
+              MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
         } else {
           setState(() {});
         }

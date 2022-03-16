@@ -3,17 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/loading.dart';
-import 'home_page.dart';
+import '../home_page.dart';
 
 bool loading = false;
 
-class LoadingPage extends StatefulWidget {
-  const LoadingPage({Key? key}) : super(key: key);
+class HomeLoadingPage extends StatefulWidget {
+  const HomeLoadingPage({Key? key}) : super(key: key);
   @override
-  _LoadingPage createState() => _LoadingPage();
+  _HomeLoadingPage createState() => _HomeLoadingPage();
 }
 
-class _LoadingPage extends State<LoadingPage> {
+class _HomeLoadingPage extends State<HomeLoadingPage> {
   @override
   Widget build(BuildContext context) {
     loading = true;
