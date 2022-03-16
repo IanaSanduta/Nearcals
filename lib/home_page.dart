@@ -25,8 +25,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This is where the data from the server is pulled from here on in you are working with local variables.
-    // However when you change a local variable with the currentUser.set....() class function it updates the server for next login.
     String? userName = currentUser.getUserName();
     String? userEmail = currentUser.getEmail();
     userName ??= 'Username';

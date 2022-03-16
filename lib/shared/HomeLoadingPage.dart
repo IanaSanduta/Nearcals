@@ -17,8 +17,13 @@ class _HomeLoadingPage extends State<HomeLoadingPage> {
   @override
   Widget build(BuildContext context) {
     loading = true;
+    // This is where the data from the server is pulled from here on in you are working with local variables.
+    // However when you change a local variable with the currentUser.set....() class function it updates the server for next login.
     pullUserData().then((value) => Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomePage())));
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const HomePage()))); // After pullUserData fully executes it redirect to the HomePage()
     return loading
         ? const Loading()
         : Scaffold(
