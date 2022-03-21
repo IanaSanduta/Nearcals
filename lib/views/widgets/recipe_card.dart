@@ -66,7 +66,7 @@ class RecipeCard extends StatelessWidget {
                   child: Row(
                     children: [
                       const SizedBox(width: 7),
-                      const Icon(Icons.local_fire_department, color: Colors.white),
+                      const Icon(Icons.local_fire_department, color: Colors.red),
                       Text(
                           calories.toString(),
                           style: const TextStyle(
