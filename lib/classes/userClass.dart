@@ -1,8 +1,15 @@
 // ignore_for_file: file_names, avoid_print
+import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:nearcals/classes/firebase_file.dart';
+import 'package:path_provider/path_provider.dart';
 
+Image? userImageFile;
 UserClass currentUser = UserClass('', '', '', 0, 0, {});
 String uID = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference db = FirebaseFirestore.instance.collection('UserData');
@@ -12,14 +19,14 @@ final List dbList = [
   'userDailyCal',
   'userCurrentCal',
   'userEmail',
-  'userImage',
+  'userImageURL',
   'favoritesList'
 ];
 
 class UserClass {
   String? username = 'un';
   String? email = 'e';
-  String? userImage = 'ui';
+  String? userImageURL;
   int? dailyCals = 0;
   int? currentCals = 0;
   Map<String, String>? favoritesList = {};
@@ -28,7 +35,7 @@ class UserClass {
       String un, String e, String ui, int dc, int cc, Map<String, String> map,
       {this.username,
       this.email,
-      this.userImage,
+      this.userImageURL,
       this.dailyCals,
       this.currentCals,
       this.favoritesList});
@@ -48,8 +55,41 @@ class UserClass {
 
   // ATTENTION PROGRAMER //
   // Use currentUser.setUserImage(String im) instead of pull functions.
-  void pullUserImage(String im) {
-    userImage = im;
+  //TODO: Make so that it pulls image file from firestore and stores it in the local resource folder
+  Future<List<FirebaseFile>> pullUserFiles() async {
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('userImages')
+        .child(uID)
+        .child(currentUser.getUserName() as String);
+    final results = await ref.listAll();
+    final urls = await _getDownloadLink(results.items);
+    return urls
+        .asMap()
+        .map((index, url) {
+          final ref = results.items[index];
+          final name = ref.name;
+          final file = FirebaseFile(ref: ref, name: name, url: url);
+          return MapEntry(index, file);
+        })
+        .values
+        .toList();
+  }
+
+  Future<List<String>> _getDownloadLink(List<Reference> refs) =>
+      Future.wait(refs.map((ref) => ref.getDownloadURL()).toList());
+
+  Future<void> pullUserImage() async {
+    Future<List<FirebaseFile>> files = pullUserFiles();
+    for (FirebaseFile file in files as List) {
+      await downloadFile(file.ref);
+    }
+  }
+
+  static Future downloadFile(Reference ref) async {
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/${uID}userImage.jpg');
+    await ref.writeToFile(file);
   }
 
   // ATTENTION PROGRAMER //
@@ -84,9 +124,13 @@ class UserClass {
   }
 
   // TODO: need to implement image storage in firestore
+  // TODO: Make so that programmer pulls image file from local storage
   // currentUser.getUserImage() will return a String of the stored User Image for the current user cause these just set local variables not the database
-  String? getUserImage() {
-    return userImage;
+  Future<String?> getUserImage() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final userImageFile = '${dir.path}/${uID}userImage.jpg';
+
+    return userImageFile;
   }
 
   // currentUser.getDailyCals() will return a integer of the stored Daily Calories for the current user cause these just set local variables not the database
@@ -132,10 +176,13 @@ class UserClass {
     currentUser.pullDailyCals(dc);
   }
 
+  // TODO: Make so that it uplaods new image file to firestore and sets local stored image as new user image
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
-  void setUserImage(String im) {
-    db.doc(uID).update({dbList[4]: im});
-    currentUser.pullUserImage(im);
+  Future<void> setUserImage(File im) async {
+    final dir = await getApplicationDocumentsDirectory();
+    var uIF = '${dir.path}/${uID}userImage.jpg';
+
+    userImageFile = uIF as Image?;
   }
 
   // currentUser.addFavoritesList(String key, String value) should add a value from the favorites list map
@@ -155,7 +202,8 @@ class UserClass {
   Future<void> clearUser() async {
     username = null;
     email = null;
-    userImage = null;
+    userImageURL = null;
+    userImageFile = null;
     dailyCals = null;
     currentCals = null;
     favoritesList?.clear();
@@ -164,6 +212,7 @@ class UserClass {
   }
 }
 
+// TODO: Makes so that it workds with new commands
 // pullUserData() Used to load all the values from firestore into the values for the currentUser class
 Future<void> pullUserData() async {
   uID = FirebaseAuth.instance.currentUser!.uid;
@@ -171,7 +220,8 @@ Future<void> pullUserData() async {
   var data = snapshot.data() as Map;
   currentUser.username = null;
   currentUser.email = null;
-  currentUser.userImage = null;
+  currentUser.userImageURL = null;
+  userImageFile = null;
   currentUser.dailyCals = null;
   currentUser.currentCals = null;
   currentUser.favoritesList?.clear();
@@ -180,7 +230,7 @@ Future<void> pullUserData() async {
   currentUser.pullCurrentCals(data[dbList[2]] as int);
   currentUser.pullEmail(data[dbList[3]] as String);
   currentUser.pullFavoritesList(data[dbList[5]] as Map);
-  currentUser.pullUserImage(data[dbList[4]] as String);
+  currentUser.pullUserImage();
   //TODO:Remove in final
   checkUserData();
 }

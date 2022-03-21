@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
-
+import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/classes/userClass.dart';
 
 class Profile extends StatefulWidget {
@@ -275,6 +275,7 @@ class _ProfileState extends State<Profile> {
 
     //Update photo into UI
     if (editImg != null) {
+      currentUser.setUserImage(editImg);
       setState(() => fileImg = editImg);
     }
   }

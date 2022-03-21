@@ -8,7 +8,8 @@ Future<void> firebaseUserSetup(
   FirebaseAuth auth = FirebaseAuth.instance;
   auth.currentUser!.updateDisplayName(userName);
   int defaultCal = 2000;
-  String defaultUserImage = 'Hello World';
+  String defaultUserImage =
+      'https://firebasestorage.googleapis.com/v0/b/nearcals.appspot.com/o/userImages%2Fdefault_user.png?alt=media&token=c2623d2c-2af2-47ef-8e2d-91485b35366a';
   Map<String, String> favoritesList = {};
 
   CollectionReference userProfile =
