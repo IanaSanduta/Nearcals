@@ -142,12 +142,11 @@ class _HomePageState extends State<HomePage> {
                 }),
             const Divider(),
             ListTile(
-                iconColor: Colors.blue.shade900,
-                leading: const Icon(Icons.exit_to_app),
-                title: const Text('Exit'),
-                onTap: () {
-                  authLongOut;
-                }),
+              iconColor: Colors.blue.shade900,
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text('Exit'),
+              onTap: () => authLongOut(),
+            ),
           ],
         ),
       ),
