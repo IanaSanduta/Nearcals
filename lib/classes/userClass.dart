@@ -1,25 +1,33 @@
 // ignore_for_file: file_names, avoid_print
-
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
+Image? userImageFile;
 UserClass currentUser = UserClass('', '', '', 0, 0, {});
 String uID = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference db = FirebaseFirestore.instance.collection('UserData');
+final ref = FirebaseStorage.instance
+    .ref()
+    .child('userImages')
+    .child(uID)
+    .child('userImage.jpg');
 
 final List dbList = [
   'username',
   'userDailyCal',
   'userCurrentCal',
   'userEmail',
-  'userImage',
+  'userImageURL',
   'favoritesList'
 ];
 
 class UserClass {
   String? username = 'un';
   String? email = 'e';
-  String? userImage = 'ui';
+  String? userImageURL = '';
   int? dailyCals = 0;
   int? currentCals = 0;
   Map<String, String>? favoritesList = {};
@@ -28,7 +36,7 @@ class UserClass {
       String un, String e, String ui, int dc, int cc, Map<String, String> map,
       {this.username,
       this.email,
-      this.userImage,
+      this.userImageURL,
       this.dailyCals,
       this.currentCals,
       this.favoritesList});
@@ -48,8 +56,8 @@ class UserClass {
 
   // ATTENTION PROGRAMER //
   // Use currentUser.setUserImage(String im) instead of pull functions.
-  void pullUserImage(String im) {
-    userImage = im;
+  Future<void> pullUserImageURL(String ui) async {
+    userImageURL = ui;
   }
 
   // ATTENTION PROGRAMER //
@@ -83,10 +91,9 @@ class UserClass {
     return email;
   }
 
-  // TODO: need to implement image storage in firestore
   // currentUser.getUserImage() will return a String of the stored User Image for the current user cause these just set local variables not the database
-  String? getUserImage() {
-    return userImage;
+  String? getUserImageURL() {
+    return userImageURL;
   }
 
   // currentUser.getDailyCals() will return a integer of the stored Daily Calories for the current user cause these just set local variables not the database
@@ -133,9 +140,21 @@ class UserClass {
   }
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
-  void setUserImage(String im) {
-    db.doc(uID).update({dbList[4]: im});
-    currentUser.pullUserImage(im);
+  Future<void> setUserImage(File im) async {
+    ref.putFile(im);
+    ref.getDownloadURL().then((value) {
+      String imURL = value.toString();
+      db.doc(uID).update({dbList[4]: imURL});
+      print(imURL);
+      userImageURL = imURL;
+    });
+    print(userImageURL);
+    uID = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot snapshot = await db.doc(uID).get();
+    var data = snapshot.data() as Map;
+    await currentUser.pullUserImageURL(data[dbList[4]] as String).then((value) {
+      print('Image Updated');
+    });
   }
 
   // currentUser.addFavoritesList(String key, String value) should add a value from the favorites list map
@@ -155,7 +174,7 @@ class UserClass {
   Future<void> clearUser() async {
     username = null;
     email = null;
-    userImage = null;
+    userImageURL = null;
     dailyCals = null;
     currentCals = null;
     favoritesList?.clear();
@@ -171,35 +190,19 @@ Future<void> pullUserData() async {
   var data = snapshot.data() as Map;
   currentUser.username = null;
   currentUser.email = null;
-  currentUser.userImage = null;
+  currentUser.userImageURL = null;
   currentUser.dailyCals = null;
   currentUser.currentCals = null;
   currentUser.favoritesList?.clear();
+  currentUser.pullUserName(data[dbList[0]] as String);
+  currentUser.pullDailyCals(data[dbList[1]] as int);
+  currentUser.pullCurrentCals(data[dbList[2]] as int);
+  currentUser.pullEmail(data[dbList[3]] as String);
+  currentUser.pullFavoritesList(data[dbList[5]] as Map);
+  currentUser.pullUserImageURL(data[dbList[4]] as String);
 
-  while (currentUser.getUserName() == null) {
-    currentUser.pullUserName(data[dbList[0]] as String);
-  }
-  print(currentUser.getUserName());
-  while (currentUser.getDailyCals() == null) {
-    currentUser.pullDailyCals(data[dbList[1]] as int);
-  }
-  print(currentUser.getDailyCals());
-  while (currentUser.getCurrentCals() == null) {
-    currentUser.pullCurrentCals(data[dbList[2]] as int);
-  }
-  print(currentUser.getCurrentCals());
-  while (currentUser.getEmail() == null) {
-    currentUser.pullEmail(data[dbList[3]] as String);
-  }
-  print(currentUser.getEmail());
-  while (currentUser.getUserImage() == null) {
-    currentUser.pullUserImage(data[dbList[4]] as String);
-  }
-  print(currentUser.getUserImage());
-  while (currentUser.getFavoriteList() == null) {
-    currentUser.pullFavoritesList(data[dbList[5]] as Map);
-  }
-  print(currentUser.getFavoriteList());
+  //TODO:Remove in final
+  checkUserData();
 }
 
 // checkUserData Used to check all the values in currentUser class (not really used)
@@ -209,6 +212,6 @@ void checkUserData() {
   print(currentUser.getEmail());
   print(currentUser.getDailyCals());
   print(currentUser.getCurrentCals());
-  print(currentUser.getUserImage());
+  print(currentUser.getUserImageURL());
   print(currentUser.getFavoriteList());
 }
