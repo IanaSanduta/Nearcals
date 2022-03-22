@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 import 'package:nearcals/classes/userClass.dart';
-import 'package:nearcals/classes/userClass.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);

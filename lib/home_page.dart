@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
               accountEmail: Text(userEmail),
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
-                  child: Image.asset(
-                    'resources/default_user.png',
+                  child: Image.network(
+                    currentUser.getUserImageURL().toString(),
                     width: 90,
                     height: 90,
                     fit: BoxFit.cover,
