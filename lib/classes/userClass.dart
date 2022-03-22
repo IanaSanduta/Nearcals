@@ -151,6 +151,12 @@ class UserClass {
       userImageURL = imURL;
     });
     print(userImageURL);
+    uID = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot snapshot = await db.doc(uID).get();
+    var data = snapshot.data() as Map;
+    await currentUser.pullUserImageURL(data[dbList[4]] as String).then((value) {
+      print('Image Updated');
+    });
   }
 
   // currentUser.addFavoritesList(String key, String value) should add a value from the favorites list map
