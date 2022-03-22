@@ -10,8 +10,6 @@ import 'dart:io';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
 
-var newImage;
-
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -237,6 +235,8 @@ class _ProfileState extends State<Profile> {
       print(e.message);
     }
   }
+
+  dynamic newImage;
 
   ///Function to edit a photo
   Future editImage(String imagePath) async {

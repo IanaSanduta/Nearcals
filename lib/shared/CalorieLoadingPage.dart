@@ -1,10 +1,9 @@
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/loading.dart';
 import '../Calories.dart';
 import 'package:nearcals/models/food.api.dart';
-
 
 bool loading = false;
 
@@ -25,11 +24,11 @@ class _CalorieLoadingPage extends State<CalorieLoadingPage> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-            const Calories()))); // After pullUserData fully executes it redirect to the HomePage()
+                const Calories()))); // After pullUserData fully executes it redirect to the HomePage()
     return loading
         ? const Loading()
         : Scaffold(
-      backgroundColor: Colors.blue.shade900,
-    );
+            backgroundColor: Colors.blue.shade900,
+          );
   }
 }

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image/flutter_image.dart';
 import 'package:nearcals/classes/userClass.dart';
-import 'package:nearcals/favorites.dart';
 import 'package:nearcals/maps.dart';
 import 'package:nearcals/profile.dart';
 import 'Calories.dart';

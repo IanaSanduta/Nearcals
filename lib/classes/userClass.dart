@@ -91,7 +91,6 @@ class UserClass {
     return email;
   }
 
-  // TODO: need to implement image storage in firestore
   // currentUser.getUserImage() will return a String of the stored User Image for the current user cause these just set local variables not the database
   String? getUserImageURL() {
     return userImageURL;
@@ -143,7 +142,6 @@ class UserClass {
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   Future<void> setUserImage(File im) async {
     ref.putFile(im);
-    String imURL;
     ref.getDownloadURL().then((value) {
       String imURL = value.toString();
       db.doc(uID).update({dbList[4]: imURL});
@@ -185,7 +183,6 @@ class UserClass {
   }
 }
 
-// TODO: Makes so that it workds with new commands
 // pullUserData() Used to load all the values from firestore into the values for the currentUser class
 Future<void> pullUserData() async {
   uID = FirebaseAuth.instance.currentUser!.uid;
