@@ -5,6 +5,7 @@ import 'package:flutter_image/flutter_image.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/maps.dart';
 import 'package:nearcals/profile.dart';
+import 'package:nearcals/shared/userLang.dart';
 import 'Calories.dart';
 import 'main.dart';
 
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     userEmail ??= 'Email';
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text(text('Home')),
       ),
       drawer: Drawer(
         child: ListView(
@@ -61,7 +62,9 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               iconColor: Colors.blue.shade900,
               leading: const Icon(Icons.local_dining),
-              title: const Text('Home'),
+
+              title: Text(text('Home')),
+
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Home()),
@@ -70,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.person),
-                title: const Text('Profile'),
+                title: Text(text('Profile')),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context,
@@ -86,7 +89,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.map),
-                title: const Text('Map'),
+                title: Text(text('Map')),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context,
@@ -95,7 +98,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.local_dining),
-                title: const Text('Calories'),
+                title: Text(text('Calories')),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -106,7 +109,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.favorite),
-                title: const Text('Favorites'),
+                title: Text(text('Favorites')),
                 onTap: () {
                   //TODO: Implement Favorites
                   print('Favorites');
@@ -122,7 +125,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.settings),
-                title: const Text('Settings'),
+                title: Text(text('Settings')),
                 onTap: () {
                   //TODO: Implement Settings
                   print('Settings');
@@ -137,7 +140,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.description),
-                title: const Text('Guide'),
+                title: Text(text('Guide')),
                 onTap: () {
                   //TODO: Implement Guide
                   print('Guide');
@@ -153,7 +156,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               iconColor: Colors.blue.shade900,
               leading: const Icon(Icons.exit_to_app),
-              title: const Text('Exit'),
+              title: Text(text('Logout')),
               onTap: () => authLongOut(),
             ),
           ],
