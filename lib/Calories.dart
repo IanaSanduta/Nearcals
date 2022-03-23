@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:nearcals/views/widgets/recipe_card.dart';
-
 import 'models/food.api.dart';
 import 'models/food.dart';
 
