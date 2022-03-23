@@ -68,6 +68,17 @@ class _ProfileState extends State<Profile> {
                           Icons.account_circle,
                           color: Colors.white,
                         ),
+                        labelText: 'Home',
+                      ),
+                    ),
+                    TextField(
+                      controller: regUsernameController,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ),
                         labelText: 'Username',
                       ),
                     ),
