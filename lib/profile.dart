@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
-
+import 'home.dart';
 import 'package:nearcals/classes/userClass.dart';
 
 class Profile extends StatefulWidget {
@@ -58,6 +58,17 @@ class _ProfileState extends State<Profile> {
                     ),
                     const SizedBox(
                       height: 24,
+                    ),
+                    TextField(
+                      controller: regUsernameController,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ),
+                        labelText: 'Home',
+                      ),
                     ),
                     TextField(
                       controller: regUsernameController,

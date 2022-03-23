@@ -31,14 +31,14 @@ void main() async {
       //Define the default Elevated Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Colors.white,
-            onPrimary: Colors.blue,
-            textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            shape:
+        primary: Colors.white,
+        onPrimary: Colors.blue,
+        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-            minimumSize: const Size(200, 42),
-          )),
+        minimumSize: const Size(200, 42),
+      )),
 
       //Define the default InputDecoration of TextField
       inputDecorationTheme: const InputDecorationTheme(
