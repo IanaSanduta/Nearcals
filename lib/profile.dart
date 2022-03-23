@@ -3,11 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_image/flutter_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
+<<<<<<< HEAD
 import 'home.dart';
+=======
+>>>>>>> a5390ac24ba122e179892b102f0b7b5ff3d6bd25
 import 'package:nearcals/classes/userClass.dart';
+import 'package:nearcals/shared/HomeLoadingPage.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -137,37 +142,36 @@ class _ProfileState extends State<Profile> {
     }
 
     return ClipOval(
-      child: Material(
-        color: const Color.fromARGB(
-          129,
-          180,
-          189,
-          185,
-        ),
-        child: Ink.image(
-          image: (fileImg != null)
-              ? image as ImageProvider
-              : const AssetImage('resources/default_user.png'),
-          fit: BoxFit.cover,
-          width: 200,
-          height: 200,
-          child: InkWell(
-              onTap: () async => showImageSource(context),
-              splashColor: const Color.fromARGB(
-                196,
-                4,
-                59,
-                229,
-              ),
-              highlightColor: const Color.fromARGB(
-                129,
-                180,
-                189,
-                185,
-              )),
-        ),
-      ),
-    );
+        child: Material(
+            color: const Color.fromARGB(
+              129,
+              180,
+              189,
+              185,
+            ),
+            child: Ink.image(
+              image: (fileImg != null)
+                  ? image as ImageProvider
+                  : NetworkImageWithRetry(
+                      currentUser.getUserImageURL().toString()),
+              fit: BoxFit.cover,
+              width: 200,
+              height: 200,
+              child: InkWell(
+                  onTap: () async => showImageSource(context),
+                  splashColor: const Color.fromARGB(
+                    196,
+                    4,
+                    59,
+                    229,
+                  ),
+                  highlightColor: const Color.fromARGB(
+                    129,
+                    180,
+                    189,
+                    185,
+                  )),
+            )));
   }
 
   //Show options to change photo
@@ -247,6 +251,8 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  dynamic newImage;
+
   ///Function to edit a photo
   Future editImage(String imagePath) async {
     // Set crop settings
@@ -286,6 +292,7 @@ class _ProfileState extends State<Profile> {
 
     //Update photo into UI
     if (editImg != null) {
+      newImage = editImg;
       setState(() => fileImg = editImg);
     }
   }
@@ -301,5 +308,10 @@ class _ProfileState extends State<Profile> {
           duration: const Duration(seconds: 3),
           backgroundColor: Colors.green.shade700),
     );
+    currentUser.setUserImage(newImage).then((value) {
+      Navigator.pop(context);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
+    });
   }
 }
