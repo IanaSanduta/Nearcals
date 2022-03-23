@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 Image? userImageFile;
-UserClass currentUser = UserClass('', '', '', 0, 0, {});
+UserClass currentUser = UserClass('', '', '', 0, 0, {}, '');
 String uID = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference db = FirebaseFirestore.instance.collection('UserData');
 final ref = FirebaseStorage.instance
@@ -21,7 +21,8 @@ final List dbList = [
   'userCurrentCal',
   'userEmail',
   'userImageURL',
-  'favoritesList'
+  'favoritesList',
+  'userLang'
 ];
 
 class UserClass {
@@ -31,51 +32,59 @@ class UserClass {
   int? dailyCals = 0;
   int? currentCals = 0;
   Map<String, String>? favoritesList = {};
+  String? userLang = '';
 
-  UserClass(
-      String un, String e, String ui, int dc, int cc, Map<String, String> map,
+  UserClass(String un, String e, String ui, int dc, int cc,
+      Map<String, String> map, String s,
       {this.username,
       this.email,
       this.userImageURL,
       this.dailyCals,
       this.currentCals,
-      this.favoritesList});
+      this.favoritesList,
+      this.userLang});
 
   // Pull Requests used by backend to update from the Database
   // ATTENTION PROGRAMER //
-  // Use currentUser.setUserName(String un) instead of pull functions.
+  // Use currentUser.set/getUserName(String un) instead of pull functions.
   void pullUserName(String un) {
     username = un;
   }
 
   // ATTENTION PROGRAMER //
-  // Use currentUser.setEmail(String e) instead of pull functions.
+  // Use currentUser.set/getEmail(String e) instead of pull functions.
   void pullEmail(String e) {
     email = e;
   }
 
   // ATTENTION PROGRAMER //
-  // Use currentUser.setUserImage(String im) instead of pull functions.
+  // Use currentUser.set/getUserImage(String im) instead of pull functions.
   Future<void> pullUserImageURL(String ui) async {
     userImageURL = ui;
   }
 
   // ATTENTION PROGRAMER //
-  // Use currentUser.setDailyCals(int dc) instead of pull functions.
+  // Use currentUser.set/getDailyCals(int dc) instead of pull functions.
   void pullDailyCals(int dc) {
     dailyCals = dc;
   }
 
   // ATTENTION PROGRAMER //
-  // Use currentUser.setCurrentCals(int cc) instead of pull functions.
+  // Use currentUser.set/getCurrentCals(int cc) instead of pull functions.
   void pullCurrentCals(int cc) {
     currentCals = cc;
   }
 
   // ATTENTION PROGRAMER //
-  // Use currentUser.setFavoriteList(int cc) instead of pull functions.
+  // Use currentUser.set/getFavoriteList(int cc) instead of pull functions.
   void pullFavoritesList(Map fl) {
     favoritesList = fl.cast<String, String>();
+  }
+
+  // ATTENTION PROGRAMER //
+  // Use currentUser.set/getUserLang(String ul) instead of pull functions.
+  void pullUserLang(String ul) {
+    userLang = ul;
   }
 
   // GETS //
@@ -109,6 +118,10 @@ class UserClass {
   // currentUser.getFavoriteList() will return a map of the entire favorite list
   Map? getFavoriteList() {
     return favoritesList;
+  }
+
+  String? getUserLang() {
+    return userLang;
   }
 
   // SETS //
@@ -170,6 +183,11 @@ class UserClass {
     db.doc(uID).update({dbList[5]: favoritesList});
   }
 
+  void setUserLang(String ul) {
+    db.doc(uID).update({dbList[6]: ul});
+    currentUser.pullUserLang(ul);
+  }
+
   // currentUser.clearUser() used by the prgram to clear all user values and sign out
   Future<void> clearUser() async {
     username = null;
@@ -179,6 +197,7 @@ class UserClass {
     currentCals = null;
     favoritesList?.clear();
     uID = '';
+    userLang = null;
     await FirebaseAuth.instance.signOut();
   }
 }
@@ -200,6 +219,7 @@ Future<void> pullUserData() async {
   currentUser.pullEmail(data[dbList[3]] as String);
   currentUser.pullFavoritesList(data[dbList[5]] as Map);
   currentUser.pullUserImageURL(data[dbList[4]] as String);
+  currentUser.pullUserLang(data[dbList[6]] as String);
 
   //TODO:Remove in final
   checkUserData();
@@ -207,11 +227,12 @@ Future<void> pullUserData() async {
 
 // checkUserData Used to check all the values in currentUser class (not really used)
 void checkUserData() {
-  print('Check User Data');
+  print('Checking User Data');
   print(currentUser.getUserName());
   print(currentUser.getEmail());
   print(currentUser.getDailyCals());
   print(currentUser.getCurrentCals());
   print(currentUser.getUserImageURL());
   print(currentUser.getFavoriteList());
+  print(currentUser.getUserLang());
 }

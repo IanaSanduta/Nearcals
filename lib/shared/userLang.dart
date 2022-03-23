@@ -6,7 +6,6 @@ String text(String word) {
   String result = '';
   final List langList = ['English', 'Spanish'];
   final Map<String, Map<String, String>> langLib = {
-    //English
     langList[0]: {
       'Home': 'Home',
       'Profile': 'Profile',
@@ -24,7 +23,6 @@ String text(String word) {
       'Sign Up': 'Sign Up',
       'Login': 'Login'
     },
-    //Spanish
     langList[1]: {
       'Home': '.',
       'Profile': '.',
