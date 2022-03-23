@@ -59,6 +59,21 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
+<<<<<<< HEAD
+              iconColor: Colors.blue.shade900,
+              leading: const Icon(Icons.local_dining),
+              title: const Text('Home'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Home()),
+              ),
+            ),
+            ListTile(
+              iconColor: Colors.blue.shade900,
+              leading: const Icon(Icons.person),
+              title: const Text('Profile'),
+              onTap: () => Navigator.push(
+=======
                 iconColor: Colors.blue.shade900,
                 leading: const Icon(Icons.person),
                 title: const Text('Profile'),
@@ -68,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                       MaterialPageRoute(builder: (context) => const Profile()));
                 }
                 /*onTap: () => Navigator.push(
+>>>>>>> a5390ac24ba122e179892b102f0b7b5ff3d6bd25
                 context,
                 MaterialPageRoute(builder: (context) => const Profile()),
               ),

@@ -7,6 +7,10 @@ import 'package:flutter_image/flutter_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
+<<<<<<< HEAD
+import 'home.dart';
+=======
+>>>>>>> a5390ac24ba122e179892b102f0b7b5ff3d6bd25
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
 
@@ -59,6 +63,17 @@ class _ProfileState extends State<Profile> {
                     ),
                     const SizedBox(
                       height: 24,
+                    ),
+                    TextField(
+                      controller: regUsernameController,
+                      style: styleInput,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ),
+                        labelText: 'Home',
+                      ),
                     ),
                     TextField(
                       controller: regUsernameController,
