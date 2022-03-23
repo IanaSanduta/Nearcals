@@ -22,6 +22,16 @@ Text text(String word) {
       'Settings': '.',
       'Guide': '.'
     },
+    //Do Not delet rows below its used as a guide to add more languages.
+    'Language': {
+      'Home': '.',
+      'Profile': '.',
+      'Map': '.',
+      'Calories': '.',
+      'Favorites': '.',
+      'Settings': '.',
+      'Guide': '.'
+    }
   };
   //result = langLib.containsKey(currentUser.getUserLang()).containsValue();
   return Text(result);
