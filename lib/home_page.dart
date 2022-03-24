@@ -5,9 +5,10 @@ import 'package:flutter_image/flutter_image.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/maps.dart';
 import 'package:nearcals/profile.dart';
+import 'package:nearcals/settings.dart';
 import 'package:nearcals/shared/userLang.dart';
-import 'Calories.dart';
-import 'main.dart';
+import 'package:nearcals/calories.dart';
+import 'package:nearcals/main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -62,9 +63,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               iconColor: Colors.blue.shade900,
               leading: const Icon(Icons.local_dining),
-
               title: Text(text('Home')),
-
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Home()),
@@ -128,14 +127,12 @@ class _HomePageState extends State<HomePage> {
                 title: Text(text('Settings')),
                 onTap: () {
                   //TODO: Implement Settings
-                  print('Settings');
-                  /*
+
                   Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Settings()));
-                */
+                          builder: (context) => const SettingsPage()));
                 }),
             ListTile(
                 iconColor: Colors.blue.shade900,

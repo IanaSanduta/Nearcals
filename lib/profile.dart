@@ -9,6 +9,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
+import 'package:nearcals/shared/userLang.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -68,17 +69,6 @@ class _ProfileState extends State<Profile> {
                           Icons.account_circle,
                           color: Colors.white,
                         ),
-                        labelText: 'Home',
-                      ),
-                    ),
-                    TextField(
-                      controller: regUsernameController,
-                      style: styleInput,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.account_circle,
-                          color: Colors.white,
-                        ),
                         labelText: 'Username',
                       ),
                     ),
@@ -115,7 +105,7 @@ class _ProfileState extends State<Profile> {
                     ),
                     ElevatedButton(
                       onPressed: updateProfile,
-                      child: const Text('Save'),
+                      child: Text(text('Apply')),
                     )
                   ],
                 ),

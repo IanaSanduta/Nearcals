@@ -2,11 +2,11 @@
 
 import 'package:nearcals/classes/userClass.dart';
 
+final List langList = ['English', 'Español'];
 String text(String word) {
   String result = '';
-  final List langList = ['English', 'Spanish'];
   final Map<String, Map<String, String>> langLib = {
-    //English
+    // English
     langList[0]: {
       'Home': 'Home',
       'Profile': 'Profile',
@@ -22,16 +22,25 @@ String text(String word) {
       'Save': 'Save',
       'Foodie Map': 'Foodie Map',
       'Sign Up': 'Sign Up',
-      'Login': 'Login'
+      'Login': 'Login',
+      'Language': 'Language',
+      'General': 'General',
+      'GENERAL': 'GENERAL',
+      'Apply': 'Apply',
+      'Update Successful': 'Update Successful',
+      'Apply Settings': 'Apply Settings'
     },
-    //Spanish
+
+    // Spanish / Español
+    // I used Google Translate for this:
+    // Someone who actually knows Spanish should proabably fill this out :^)
     langList[1]: {
-      'Home': '.',
+      'Home': 'Hogar',
       'Profile': '.',
       'Map': '.',
       'Calories': '.',
       'Favorites': '.',
-      'Settings': '.',
+      'Settings': 'Configuración',
       'Guide': '.',
       'Logout': '.',
       'Email': '.',
@@ -40,7 +49,13 @@ String text(String word) {
       'Save': '.',
       'Foodie Map': '.',
       'Sign Up': '.',
-      'Login': '.'
+      'Login': '.',
+      'Language': 'Idioma',
+      'General': '.',
+      'GENERAL': '.',
+      'Apply': 'Aplicar',
+      'Update Successful': 'Actualización correcta',
+      'Apply Settings': '.'
     },
     //Do Not delet rows below its used as a guide to add more languages.
     /*
@@ -59,10 +74,24 @@ String text(String word) {
       'Save':'.',
       'Foodie Map': '.',
       'Sign Up':'.',
-      'Login': '.'
+      'Login': '.',
+      'Language':'.',
+      'General':'.',
+      'GENERAL':'.',
+      'Apply':'.',
+      'Update Successful':'.',
+      'Apply Settings': '.'
     }*/
   };
-  Map<String, String>? languageLibrary = langLib[currentUser.getUserLang()];
-  result = languageLibrary![word] as String;
+  try {
+    Map<String, String>? languageLibrary = langLib[currentUser.getUserLang()];
+    result = languageLibrary![word] as String;
+    if (result == '.' || result == null) {
+      result = 'Word is not in Library';
+    }
+  } catch (e) {
+    //this will probably never run
+    result = 'Language not in Library';
+  }
   return result;
 }
