@@ -2,7 +2,7 @@
 
 import 'package:nearcals/classes/userClass.dart';
 
-final List langList = ['English', 'Español'];
+final List langList = ['English', 'Español', 'Japanese'];
 String text(String word) {
   String result = '';
   final Map<String, Map<String, String>> langLib = {
@@ -28,7 +28,8 @@ String text(String word) {
       'GENERAL': 'GENERAL',
       'Apply': 'Apply',
       'Update Successful': 'Update Successful',
-      'Apply Settings': 'Apply Settings'
+      'Apply Settings': 'Apply Settings',
+      'Total Calories today': 'Total Calories today'
     },
 
     // Spanish / Español
@@ -55,9 +56,36 @@ String text(String word) {
       'GENERAL': '.',
       'Apply': 'Aplicar',
       'Update Successful': 'Actualización correcta',
-      'Apply Settings': '.'
+      'Apply Settings': '.',
+      'Total Calories today': '.'
     },
-    //Do Not delet rows below its used as a guide to add more languages.
+
+    langList[2]: {
+      'Home': '.',
+      'Profile': '.',
+      'Map': '.',
+      'Calories': '.',
+      'Favorites': '.',
+      'Settings': '.',
+      'Guide': '.',
+      'Logout': '.',
+      'Email': '.',
+      'Username': '.',
+      'Daily Calories': '.',
+      'Save': '.',
+      'Foodie Map': '.',
+      'Sign Up': '.',
+      'Login': '.',
+      'Language': '.',
+      'General': '.',
+      'GENERAL': '.',
+      'Apply': '.',
+      'Update Successful': '.',
+      'Apply Settings': '.',
+      'Total Calories today': '.'
+    },
+
+    // Do Not delete rows below its used as a guide to add more languages.
     /*
     langList[.]: {
       'Home': '.',
@@ -80,8 +108,9 @@ String text(String word) {
       'GENERAL':'.',
       'Apply':'.',
       'Update Successful':'.',
-      'Apply Settings': '.'
-    }*/
+      'Apply Settings': '.',
+      'Total Calories today': '.'
+    },*/
   };
   try {
     Map<String, String>? languageLibrary = langLib[currentUser.getUserLang()];

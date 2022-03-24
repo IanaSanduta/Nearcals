@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:nearcals/classes/userClass.dart';
+import 'package:nearcals/homePage.dart';
 import 'package:nearcals/shared/loading.dart';
-import '../home_page.dart';
 
 bool loading = false;
 

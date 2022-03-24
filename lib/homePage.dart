@@ -3,19 +3,24 @@ import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/profile.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:nearcals/shared/quickDrawer.dart';
+import 'package:nearcals/shared/userLang.dart';
 import 'dart:math' as math;
 import 'profile.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class Home extends StatelessWidget {
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text(text('Home')),
         backgroundColor: Colors.lightBlue.shade900,
       ),
+      drawer: const QuickDrawer(),
       body: Column(
         children: [
           Container(
@@ -51,7 +56,7 @@ class Home extends StatelessWidget {
               animationDuration: 1500,
               center: new Text('800', style: TextStyle(fontSize: 20)),
               footer: new Text(
-                'Total Calories today',
+                text('Total Calories today'),
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.blue.shade900,

@@ -35,7 +35,7 @@ class _SettingsPage extends State<SettingsPage> {
               });
             },
             //Add more Language options here  VVV
-            items: <String>[langList[0], langList[1]]
+            items: <String>[langList[0], langList[1], langList[2]]
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
