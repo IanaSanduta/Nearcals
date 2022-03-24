@@ -38,13 +38,12 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var styleInput = const TextStyle(color: Colors.white);
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: Colors.indigo.shade700,
         appBar: AppBar(
-          title: const Text('Profile'),
+          title: Text(text('Profile')),
         ),
         body: SafeArea(
           child: Center(
@@ -168,13 +167,13 @@ class _ProfileState extends State<Profile> {
           builder: (context) => CupertinoActionSheet(
                 actions: [
                   CupertinoActionSheetAction(
-                      child: const Text('Camera'),
+                      child: Text(text('Camera')),
                       onPressed: () {
                         pickImage(ImageSource.camera);
                         Navigator.pop(context);
                       }),
                   CupertinoActionSheetAction(
-                      child: const Text('Gallery'),
+                      child: Text(text('Gallery')),
                       onPressed: () {
                         pickImage(ImageSource.gallery);
                         Navigator.pop(context);
@@ -192,8 +191,8 @@ class _ProfileState extends State<Profile> {
                     color: Colors.blue.shade900,
                     padding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-                    child: const Text('Profile Photo',
-                        style: TextStyle(
+                    child: Text(text('Profile Photo'),
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
@@ -202,7 +201,7 @@ class _ProfileState extends State<Profile> {
                   ListTile(
                     iconColor: Colors.blue.shade900,
                     leading: const Icon(Icons.camera_alt),
-                    title: const Text('Camera'),
+                    title: Text(text('Camera')),
                     onTap: () {
                       pickImage(ImageSource.camera);
                       Navigator.pop(context);
@@ -211,7 +210,7 @@ class _ProfileState extends State<Profile> {
                   ListTile(
                       iconColor: Colors.blue.shade900,
                       leading: const Icon(Icons.image),
-                      title: const Text('Gallery'),
+                      title: Text(text('Gallery')),
                       onTap: () {
                         pickImage(ImageSource.gallery);
                         Navigator.pop(context);
@@ -290,7 +289,7 @@ class _ProfileState extends State<Profile> {
     currentUser.setDailyCals(int.parse(regDailyCalControl.text));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-          content: const Text('Successful Update'),
+          content: Text(text('Update Successful')),
           duration: const Duration(seconds: 3),
           backgroundColor: Colors.green.shade700),
     );

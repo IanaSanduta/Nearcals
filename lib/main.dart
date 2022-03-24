@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
 import 'package:nearcals/login.dart';
 import 'package:nearcals/register.dart';
+import 'package:nearcals/shared/userLang.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -110,7 +111,7 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const RegScreen())),
-                        child: const Text('Sign Up'),
+                        child: Text(text('Sign Up')),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
@@ -118,7 +119,7 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LoginScreen())),
-                        child: const Text('Log In'),
+                        child: Text(text('Login')),
                       ),
                     ],
                   ),

@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:nearcals/shared/userLang.dart';
 import 'package:nearcals/views/widgets/recipe_card.dart';
 import 'models/food.api.dart';
 import 'models/food.dart';
@@ -42,7 +43,7 @@ class _CaloriesState extends State<Calories> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Calories'),
+          title: Text(text('Calories')),
         ),
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())
