@@ -11,14 +11,14 @@ import 'package:nearcals/shared/userLang.dart';
 import 'package:nearcals/calories.dart';
 import 'package:nearcals/main.dart';
 
-class QuickDrawer extends StatefulWidget {
-  const QuickDrawer({Key? key}) : super(key: key);
+class NaviDrawer extends StatefulWidget {
+  const NaviDrawer({Key? key}) : super(key: key);
 
   @override
-  _QuickDrawer createState() => _QuickDrawer();
+  _NaviDrawer createState() => _NaviDrawer();
 }
 
-class _QuickDrawer extends State<QuickDrawer> {
+class _NaviDrawer extends State<NaviDrawer> {
   //Define authentication function
   void authLongOut() {
     currentUser.clearUser();

@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:nearcals/shared/quickDrawer.dart';
+import 'package:nearcals/shared/naviDrawer.dart';
 import 'package:nearcals/shared/userLang.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
         title: Text(text('Home')),
         backgroundColor: Colors.lightBlue.shade900,
       ),
-      drawer: const QuickDrawer(),
+      drawer: const NaviDrawer(),
       body: Column(
         children: [
           Stack(
