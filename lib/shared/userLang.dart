@@ -71,7 +71,7 @@ String text(String word) {
     },
 
     // Japanese / 日本
-    // I used Google translate for this too.
+    // I used Google translate for this too:
     // But as I was going through it I recognized some words so its atleast semi-accurate
     langList[2]: {
       'Home': '家',

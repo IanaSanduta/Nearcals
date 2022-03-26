@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-//Costom CLipper class with Path
+//Custom Clipper class with Path
 class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
