@@ -1,64 +1,60 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nearcals/classes/userClass.dart';
-import 'package:nearcals/profile.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
-import 'profile.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+// ignore_for_file: file_names
 
-class Home extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:nearcals/shared/naviDrawer.dart';
+import 'package:nearcals/shared/userLang.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text(text('Home')),
         backgroundColor: Colors.lightBlue.shade900,
       ),
+      drawer: const NaviDrawer(),
       body: Column(
         children: [
-          Container(
-            child: Stack(
-              children: [
-                Opacity(
-                  opacity: 0.5,
-                  child: ClipPath(
-                    clipper: WaveClipper(),
-                    child: Container(
-                      color: Colors.blue.shade900,
-                      height: 100,
-                    ),
-                  ),
-                ),
-                ClipPath(
+          Stack(
+            children: [
+              Opacity(
+                opacity: 0.5,
+                child: ClipPath(
                   clipper: WaveClipper(),
                   child: Container(
-                    color: Colors.blue,
-                    height: 90,
-                    alignment: Alignment.center,
+                    color: Colors.blue.shade900,
+                    height: 100,
                   ),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            child: CircularPercentIndicator(
-              radius: 100.0,
-              lineWidth: 30.0,
-              percent: 0.8,
-              animation: true,
-              animationDuration: 1500,
-              center: new Text('800', style: TextStyle(fontSize: 20)),
-              footer: new Text(
-                'Total Calories today',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.blue.shade900,
+              ),
+              ClipPath(
+                clipper: WaveClipper(),
+                child: Container(
+                  color: Colors.blue,
+                  height: 90,
+                  alignment: Alignment.center,
                 ),
               ),
-              progressColor: Colors.lightBlueAccent,
+            ],
+          ),
+          CircularPercentIndicator(
+            radius: 100.0,
+            lineWidth: 30.0,
+            percent: 0.8,
+            animation: true,
+            animationDuration: 1500,
+            center: const Text('800', style: TextStyle(fontSize: 20)),
+            footer: Text(
+              text('Total Calories'),
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.blue.shade900,
+              ),
             ),
+            progressColor: Colors.lightBlueAccent,
           )
         ],
       ),
@@ -66,12 +62,12 @@ class Home extends StatelessWidget {
   }
 }
 
-//Costom CLipper class with Path
+//Custom Clipper class with Path
 class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     debugPrint(size.width.toString());
-    var path = new Path();
+    var path = Path();
     path.lineTo(
         0, size.height); //start path with this if you are making at bottom
     var firstStart = Offset(size.width / 5, size.height);
