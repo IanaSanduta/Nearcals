@@ -5,9 +5,10 @@ import 'package:nearcals/classes/userClass.dart';
 final List langList = ['English', 'Español', 'Japanese 日本'];
 String text(String word) {
   String result = '';
-  final Map<String, Map<String, String>> langLib = {
-    // English
-    langList[0]: {
+  Map<String, String>? languageLibrary;
+  // English
+  if (langList[0] == currentUser.getUserLang()) {
+    languageLibrary = {
       'Home': 'Home',
       'Profile': 'Profile',
       'Map': 'Map',
@@ -35,12 +36,14 @@ String text(String word) {
       'Camera': 'Camera',
       'Gallery': 'Gallery',
       'Profile Photo': 'Profile Photo'
-    },
+    };
+  }
 
-    // Spanish / Español
-    // I used Google Translate for this:
-    // Someone who actually knows Spanish should proabably fill this out ;^)
-    langList[1]: {
+  // Spanish / Español
+  // I used Google Translate for this:
+  // Someone who actually knows Spanish should proabably fill this out ;^)
+  if (langList[1] == currentUser.getUserLang()) {
+    languageLibrary = {
       'Home': 'Hogar',
       'Profile': '.',
       'Map': '.',
@@ -68,12 +71,14 @@ String text(String word) {
       'Camera': '.',
       'Gallery': '.',
       'Profile Photo': '.'
-    },
+    };
+  }
 
-    // Japanese / 日本
-    // I used Google translate for this too:
-    // But as I was going through it I recognized some words so its atleast semi-accurate
-    langList[2]: {
+  // Japanese / 日本
+  // I used Google translate for this too:
+  // But as I was going through it I recognized some words so its atleast semi-accurate
+  if (langList[2] == currentUser.getUserLang()) {
+    languageLibrary = {
       'Home': '家',
       'Profile': 'プロフィール',
       'Map': '地図',
@@ -101,11 +106,13 @@ String text(String word) {
       'Camera': 'カメラ',
       'Gallery': 'フォトギャラリー',
       'Profile Photo': 'プロフィールの写真'
-    },
+    };
+  }
 
-    // Do Not delete rows below its used as a guide to add more languages.
-    /*
-    langList[.]: {
+  // Do Not delete rows below its used as a guide to add more languages.
+  /*
+    if (langList[.]==currentUser.getUserLang()) {
+      languageLibrary ={
       'Home': '.',
       'Profile': '.',
       'Map': '.',
@@ -133,17 +140,18 @@ String text(String word) {
       'Camera': '.',
       'Gallery': '.',
       'Profile Photo': '.'
-    },*/
-  };
+    };}*/
+  else {
+    //this will probably never run
+    result = 'Language not in Library';
+  }
   try {
-    Map<String, String>? languageLibrary = langLib[currentUser.getUserLang()];
     result = languageLibrary![word] as String;
     if (result == '.') {
       result = 'Word is not in Library';
     }
   } catch (e) {
-    //this will probably never run
-    result = 'Language not in Library';
+    result = 'Word is not in Library';
   }
   return result;
 }
