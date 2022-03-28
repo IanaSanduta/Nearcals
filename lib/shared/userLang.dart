@@ -37,8 +37,7 @@ String text(String word) {
       'Gallery': 'Gallery',
       'Profile Photo': 'Profile Photo',
       'Select Language': 'Select Language',
-      'Congratulations Account Was Created':
-          'Congratulations Account Was Created'
+      'User Setup': 'User Setup'
     };
   }
 
@@ -75,7 +74,7 @@ String text(String word) {
       'Gallery': '.',
       'Profile Photo': '.',
       'Select Language': '.',
-      'Congratulations Account Was Created': '.'
+      'User Setup': '.'
     };
   }
 
@@ -105,14 +104,14 @@ String text(String word) {
       'Apply': '今すぐ申し込む',
       'Update Successful': '更新に成功',
       'Apply Settings': '設定を適用する',
-      'Remaining Calories': '.',
+      'Remaining Calories': '残りのカロリー',
       'Enter your email': 'メールアドレスを入力',
       'Enter your password': 'パスワードを入力してください',
       'Camera': 'カメラ',
       'Gallery': 'フォトギャラリー',
       'Profile Photo': 'プロフィールの写真',
-      'Select Language': '.',
-      'Congratulations Account Was Created': '.'
+      'Select Language': '言語を選択する',
+      'User Setup': 'ユーザー設定'
     };
   }
 
