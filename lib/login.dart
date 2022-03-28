@@ -82,9 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: loginEmailController,
                 style: styleInput,
-                decoration: InputDecoration(
-                  hintText: text('Enter your email'),
-                  prefixIcon: const Icon(
+                decoration: const InputDecoration(
+                  hintText: 'Enter your email',
+                  prefixIcon: Icon(
                     Icons.email,
                     color: Colors.white,
                   ),
@@ -96,13 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: loginPassController,
                 style: styleInput,
-                decoration: InputDecoration(
-                  hintText: text('Enter your password'),
-                  prefixIcon: const Icon(
+                decoration: const InputDecoration(
+                  hintText: 'Enter your password',
+                  prefixIcon: Icon(
                     Icons.lock,
                     color: Colors.white,
                   ),
-                  suffixIcon: iconObscure,
                 ),
                 obscureText: _isObscure,
               ),

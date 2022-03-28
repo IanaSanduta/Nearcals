@@ -111,7 +111,7 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const RegScreen())),
-                        child: Text(text('Sign Up')),
+                        child: const Text('Sign Up'),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
@@ -119,7 +119,7 @@ class Home extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LoginScreen())),
-                        child: Text(text('Login')),
+                        child: const Text('Login'),
                       ),
                     ],
                   ),
