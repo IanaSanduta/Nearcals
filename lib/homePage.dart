@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
             animationDuration: 1500,
             center: Text(stBurntCals, style: const TextStyle(fontSize: 20)),
             footer: Text(
-              text('Total Calories'),
+              text('Remaining Calories'),
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.blue.shade900,
