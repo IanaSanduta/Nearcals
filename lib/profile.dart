@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_image/flutter_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
-
 import 'package:nearcals/classes/userClass.dart';
+import 'package:nearcals/shared/HomeLoadingPage.dart';
+import 'package:nearcals/shared/userLang.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -36,13 +38,12 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var styleInput = const TextStyle(color: Colors.white);
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: Colors.indigo.shade700,
         appBar: AppBar(
-          title: const Text('Profile'),
+          title: Text(text('Profile')),
         ),
         body: SafeArea(
           child: Center(
@@ -103,7 +104,7 @@ class _ProfileState extends State<Profile> {
                     ),
                     ElevatedButton(
                       onPressed: updateProfile,
-                      child: const Text('Save'),
+                      child: Text(text('Apply')),
                     )
                   ],
                 ),
@@ -126,37 +127,36 @@ class _ProfileState extends State<Profile> {
     }
 
     return ClipOval(
-      child: Material(
-        color: const Color.fromARGB(
-          129,
-          180,
-          189,
-          185,
-        ),
-        child: Ink.image(
-          image: (fileImg != null)
-              ? image as ImageProvider
-              : const AssetImage('resources/default_user.png'),
-          fit: BoxFit.cover,
-          width: 200,
-          height: 200,
-          child: InkWell(
-              onTap: () async => showImageSource(context),
-              splashColor: const Color.fromARGB(
-                196,
-                4,
-                59,
-                229,
-              ),
-              highlightColor: const Color.fromARGB(
-                129,
-                180,
-                189,
-                185,
-              )),
-        ),
-      ),
-    );
+        child: Material(
+            color: const Color.fromARGB(
+              129,
+              180,
+              189,
+              185,
+            ),
+            child: Ink.image(
+              image: (fileImg != null)
+                  ? image as ImageProvider
+                  : NetworkImageWithRetry(
+                      currentUser.getUserImageURL().toString()),
+              fit: BoxFit.cover,
+              width: 200,
+              height: 200,
+              child: InkWell(
+                  onTap: () async => showImageSource(context),
+                  splashColor: const Color.fromARGB(
+                    196,
+                    4,
+                    59,
+                    229,
+                  ),
+                  highlightColor: const Color.fromARGB(
+                    129,
+                    180,
+                    189,
+                    185,
+                  )),
+            )));
   }
 
   //Show options to change photo
@@ -167,13 +167,13 @@ class _ProfileState extends State<Profile> {
           builder: (context) => CupertinoActionSheet(
                 actions: [
                   CupertinoActionSheetAction(
-                      child: const Text('Camera'),
+                      child: Text(text('Camera')),
                       onPressed: () {
                         pickImage(ImageSource.camera);
                         Navigator.pop(context);
                       }),
                   CupertinoActionSheetAction(
-                      child: const Text('Gallery'),
+                      child: Text(text('Gallery')),
                       onPressed: () {
                         pickImage(ImageSource.gallery);
                         Navigator.pop(context);
@@ -191,8 +191,8 @@ class _ProfileState extends State<Profile> {
                     color: Colors.blue.shade900,
                     padding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-                    child: const Text('Profile Photo',
-                        style: TextStyle(
+                    child: Text(text('Profile Photo'),
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
@@ -201,7 +201,7 @@ class _ProfileState extends State<Profile> {
                   ListTile(
                     iconColor: Colors.blue.shade900,
                     leading: const Icon(Icons.camera_alt),
-                    title: const Text('Camera'),
+                    title: Text(text('Camera')),
                     onTap: () {
                       pickImage(ImageSource.camera);
                       Navigator.pop(context);
@@ -210,7 +210,7 @@ class _ProfileState extends State<Profile> {
                   ListTile(
                       iconColor: Colors.blue.shade900,
                       leading: const Icon(Icons.image),
-                      title: const Text('Gallery'),
+                      title: Text(text('Gallery')),
                       onTap: () {
                         pickImage(ImageSource.gallery);
                         Navigator.pop(context);
@@ -235,6 +235,8 @@ class _ProfileState extends State<Profile> {
       print(e.message);
     }
   }
+
+  dynamic newImage;
 
   ///Function to edit a photo
   Future editImage(String imagePath) async {
@@ -275,6 +277,7 @@ class _ProfileState extends State<Profile> {
 
     //Update photo into UI
     if (editImg != null) {
+      newImage = editImg;
       setState(() => fileImg = editImg);
     }
   }
@@ -286,9 +289,14 @@ class _ProfileState extends State<Profile> {
     currentUser.setDailyCals(int.parse(regDailyCalControl.text));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-          content: const Text('Successful Update'),
+          content: Text(text('Update Successful')),
           duration: const Duration(seconds: 3),
           backgroundColor: Colors.green.shade700),
     );
+    currentUser.setUserImage(newImage).then((value) {
+      Navigator.pop(context);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
+    });
   }
 }

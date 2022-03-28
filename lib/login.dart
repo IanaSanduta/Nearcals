@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
+import 'package:nearcals/shared/userLang.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -95,13 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: loginPassController,
                 style: styleInput,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Enter your password',
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.lock,
                     color: Colors.white,
                   ),
-                  suffixIcon: iconObscure,
                 ),
                 obscureText: _isObscure,
               ),
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ElevatedButton(
                 onPressed: authLongIn,
-                child: const Text('Log In'),
+                child: Text(text('Login')),
               ),
             ],
           ),

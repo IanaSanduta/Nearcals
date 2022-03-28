@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:nearcals/maps.dart';
 
 class RecipeCard extends StatelessWidget {
   final String name;
@@ -20,7 +21,7 @@ class RecipeCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 180,
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Colors.blue.shade900,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -36,6 +37,32 @@ class RecipeCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(5),
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 7),
+                    //const Icon(Icons.local_fire_department, color: Colors.red),
+                    Text(
+                      brandName.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
           Align(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -43,10 +70,10 @@ class RecipeCard extends StatelessWidget {
                 name,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 19,
+                  fontSize: 15,
                 ),
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+                maxLines: 3,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -68,19 +95,37 @@ class RecipeCard extends StatelessWidget {
                       const SizedBox(width: 7),
                       const Icon(Icons.local_fire_department, color: Colors.red),
                       Text(
-                          calories.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
+                        calories.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
                       ),
                     ],
                   ),
                 ),
+                IconButton(
+                  icon: const Icon(Icons.arrow_circle_right_sharp, color: Colors.white,),
+                  color: Colors.white,
+                  iconSize: 25,
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Maps()));
+                  },
+                ),
+/*
+
+
+*/
                 /*
-                Container(
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.all(10),
+                    child: const Text('Map'),
+                    onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Maps()));
+                    }),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
@@ -91,8 +136,9 @@ class RecipeCard extends StatelessWidget {
                       //Text(cookTime),
                     ],
                   ),
-                )
-                */
+    */
+
+                //),
               ],
             ),
             alignment: Alignment.bottomLeft,
@@ -102,3 +148,5 @@ class RecipeCard extends StatelessWidget {
     );
   }
 }
+
+
