@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
-import 'package:nearcals/shared/userLang.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -110,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ElevatedButton(
                 onPressed: authLongIn,
-                child: Text(text('Login')),
+                child: const Text('Login'),
               ),
             ],
           ),

@@ -35,7 +35,10 @@ String text(String word) {
       'Enter your password': 'Enter your password',
       'Camera': 'Camera',
       'Gallery': 'Gallery',
-      'Profile Photo': 'Profile Photo'
+      'Profile Photo': 'Profile Photo',
+      'Select Language': 'Select Language',
+      'Congratulations Account Was Created':
+          'Congratulations Account Was Created'
     };
   }
 
@@ -70,7 +73,9 @@ String text(String word) {
       'Enter your password': '.',
       'Camera': '.',
       'Gallery': '.',
-      'Profile Photo': '.'
+      'Profile Photo': '.',
+      'Select Language': '.',
+      'Congratulations Account Was Created': '.'
     };
   }
 
@@ -105,7 +110,9 @@ String text(String word) {
       'Enter your password': 'パスワードを入力してください',
       'Camera': 'カメラ',
       'Gallery': 'フォトギャラリー',
-      'Profile Photo': 'プロフィールの写真'
+      'Profile Photo': 'プロフィールの写真',
+      'Select Language': '.',
+      'Congratulations Account Was Created': '.'
     };
   }
 
@@ -139,7 +146,9 @@ String text(String word) {
       'Enter your password': '.',
       'Camera': '.',
       'Gallery': '.',
-      'Profile Photo': '.'
+      'Profile Photo': '.',
+      'Select Language': '.',
+      'Congratulations Account Was Created':'.'
     };}*/
   else {
     //this will probably never run
