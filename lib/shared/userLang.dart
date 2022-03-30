@@ -72,7 +72,9 @@ String text(String word) {
       'Enter your password': 'Ingrese su contrasena',
       'Camera': 'Camara',
       'Gallery': 'Galeria',
-      'Profile Photo': 'Foto de Perfil'
+      'Profile Photo': 'Foto de Perfil',
+      'Select Language': '.',
+      'User Setup': '.',
     };
   }
 
