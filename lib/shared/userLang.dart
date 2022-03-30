@@ -147,7 +147,7 @@ String text(String word) {
       'Gallery': '.',
       'Profile Photo': '.',
       'Select Language': '.',
-      'Congratulations Account Was Created':'.'
+      'User Setup':'.'
     };}*/
   else {
     //this will probably never run
