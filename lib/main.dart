@@ -77,57 +77,56 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? firebaseUser = FirebaseAuth.instance.currentUser?.uid;
-    /*
+
     if (firebaseUser != null) {
       return const HomeLoadingPage();
     } else {
-      */
-    return Scaffold(
-        backgroundColor: Colors.blue.shade900,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Text(
-                    'NearCals',
-                    style: Theme.of(context).textTheme.headline2,
+      return Scaffold(
+          backgroundColor: Colors.blue.shade900,
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      'NearCals',
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  child: Image.asset('resources/logo.png'),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    child: Image.asset('resources/logo.png'),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 50),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegScreen())),
-                      child: const Text('Sign Up'),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen())),
-                      child: const Text('Login'),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegScreen())),
+                        child: const Text('Sign Up'),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen())),
+                        child: const Text('Login'),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ));
+              ],
+            ),
+          ));
+    }
   }
 }
-//}
