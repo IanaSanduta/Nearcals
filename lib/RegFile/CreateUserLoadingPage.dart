@@ -4,7 +4,6 @@ import 'package:nearcals/RegFile/UserCreatedPage.dart';
 import 'package:nearcals/RegFile/userSetup.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
 import 'package:nearcals/shared/loading.dart';
-import 'package:nearcals/RegFile/userSetup.dart';
 
 class CreateLoadingPage extends StatefulWidget {
   const CreateLoadingPage({Key? key}) : super(key: key);
