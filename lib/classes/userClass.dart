@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 Image? userImageFile;
-UserClass currentUser = UserClass('', '', '', 0, 0, {}, '');
+UserClass currentUser = UserClass('', '', '', 0, 0, {}, '', '');
 String uID = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference db = FirebaseFirestore.instance.collection('UserData');
 final ref = FirebaseStorage.instance
@@ -22,7 +22,8 @@ final List dbList = [
   'userEmail',
   'userImageURL',
   'favoritesList',
-  'userLang'
+  'userLang',
+  'lastLogin'
 ];
 
 class UserClass {
@@ -33,16 +34,18 @@ class UserClass {
   int? currentCals = 0;
   Map<String, String>? favoritesList = {};
   String? userLang = '';
+  String? lastLogin = '';
 
   UserClass(String un, String e, String ui, int dc, int cc,
-      Map<String, String> map, String s,
+      Map<String, String> map, String ul, String ll,
       {this.username,
       this.email,
       this.userImageURL,
       this.dailyCals,
       this.currentCals,
       this.favoritesList,
-      this.userLang});
+      this.userLang,
+      this.lastLogin});
 
   // Pull Requests used by backend to update from the Database
   // ATTENTION PROGRAMER //
@@ -87,6 +90,10 @@ class UserClass {
     userLang = ul;
   }
 
+  void pullLastLogin(String ll) {
+    lastLogin = ll;
+  }
+
   // GETS //
   // get requests used by programers to get specific values from currentUser
 
@@ -122,6 +129,10 @@ class UserClass {
 
   String? getUserLang() {
     return userLang;
+  }
+
+  String? getLastLogin() {
+    return lastLogin;
   }
 
   // SETS //
@@ -188,6 +199,10 @@ class UserClass {
     currentUser.pullUserLang(ul);
   }
 
+  void setLastLogin(String ll) {
+    db.doc(uID).update({dbList[7]: ll});
+  }
+
   // currentUser.clearUser() used by the prgram to clear all user values and sign out
   Future<void> clearUser() async {
     username = null;
@@ -198,6 +213,7 @@ class UserClass {
     favoritesList?.clear();
     uID = '';
     userLang = null;
+    lastLogin = '';
     await FirebaseAuth.instance.signOut();
   }
 }
@@ -207,19 +223,20 @@ Future<void> pullUserData() async {
   uID = FirebaseAuth.instance.currentUser!.uid;
   DocumentSnapshot snapshot = await db.doc(uID).get();
   var data = snapshot.data() as Map;
-  currentUser.username = null;
-  currentUser.email = null;
-  currentUser.userImageURL = null;
-  currentUser.dailyCals = null;
-  currentUser.currentCals = null;
-  currentUser.favoritesList?.clear();
   currentUser.pullUserName(data[dbList[0]] as String);
   currentUser.pullDailyCals(data[dbList[1]] as int);
   currentUser.pullCurrentCals(data[dbList[2]] as int);
   currentUser.pullEmail(data[dbList[3]] as String);
   currentUser.pullFavoritesList(data[dbList[5]] as Map);
-  currentUser.pullUserImageURL(data[dbList[4]] as String);
+  currentUser.pullUserImageURL(data[dbList[4]]);
   currentUser.pullUserLang(data[dbList[6]] as String);
+  currentUser.pullLastLogin(data[dbList[7]] as String);
+  var now = DateTime.now();
+  String today = '${now.day}/${now.month}/${now.year}';
+  if (currentUser.getLastLogin() != today) {
+    currentUser.setLastLogin(today);
+    currentUser.setCurrentCals(0);
+  }
 
   //TODO:Remove in final
   checkUserData();
@@ -235,4 +252,5 @@ void checkUserData() {
   print(currentUser.getUserImageURL());
   print(currentUser.getFavoriteList());
   print(currentUser.getUserLang());
+  print(currentUser.getLastLogin());
 }

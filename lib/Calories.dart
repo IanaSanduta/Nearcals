@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:nearcals/shared/userLang.dart';
 import 'package:nearcals/views/widgets/recipe_card.dart';
 import 'models/food.api.dart';
 import 'models/food.dart';
@@ -43,26 +42,46 @@ class _CaloriesState extends State<Calories> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(text('Calories')),
+          title:
+          const TextField(
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search, color: Colors.white),
+              border: OutlineInputBorder(),
+              hintText: 'Enter a search term',
+            ),
+          ),
         ),
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())
             : ListView.builder(
-                itemCount: _foodlist.length,
-                itemBuilder: (context, index) {
-                  return RecipeCard(
-                      name: _foodlist[index].name,
-                      calories: _foodlist[index].calories,
-                      brandName: _foodlist[index].brandName);
-                }));
-  }
-  /*
-  @override
+            itemCount: _foodlist.length,
+            itemBuilder: (context, index) {
+              return RecipeCard(
+                  name: _foodlist[index].name,
+                  calories: _foodlist[index].calories,
+                  brandName: _foodlist[index].brandName);
+            })
+    );
 
-  Widget build(BuildContext context) {
-    return Container();
   }
+/*
+  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const <Widget>[
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Enter a search term',
+            ),
+          ),
+        ),
+      ],
+    );
 
    */
 
 }
+
