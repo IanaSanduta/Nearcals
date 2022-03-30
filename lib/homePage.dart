@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/naviDrawer.dart';
 import 'package:nearcals/shared/userLang.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -10,6 +11,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int? curCals = currentUser.getCurrentCals();
+    int? dayCals = currentUser.getDailyCals();
+    int? burntCalsInt = dayCals! - curCals!;
+    double? burntCalsPer = (curCals / dayCals);
+    String stBurntCals = burntCalsInt.toString();
     return Scaffold(
       appBar: AppBar(
         title: Text(text('Home')),
@@ -43,12 +49,12 @@ class HomePage extends StatelessWidget {
           CircularPercentIndicator(
             radius: 100.0,
             lineWidth: 30.0,
-            percent: 0.8,
+            percent: burntCalsPer,
             animation: true,
             animationDuration: 1500,
-            center: const Text('800', style: TextStyle(fontSize: 20)),
+            center: Text(stBurntCals, style: const TextStyle(fontSize: 20)),
             footer: Text(
-              text('Total Calories'),
+              text('Remaining Calories'),
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.blue.shade900,

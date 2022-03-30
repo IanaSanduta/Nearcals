@@ -207,18 +207,12 @@ Future<void> pullUserData() async {
   uID = FirebaseAuth.instance.currentUser!.uid;
   DocumentSnapshot snapshot = await db.doc(uID).get();
   var data = snapshot.data() as Map;
-  currentUser.username = null;
-  currentUser.email = null;
-  currentUser.userImageURL = null;
-  currentUser.dailyCals = null;
-  currentUser.currentCals = null;
-  currentUser.favoritesList?.clear();
   currentUser.pullUserName(data[dbList[0]] as String);
   currentUser.pullDailyCals(data[dbList[1]] as int);
   currentUser.pullCurrentCals(data[dbList[2]] as int);
   currentUser.pullEmail(data[dbList[3]] as String);
   currentUser.pullFavoritesList(data[dbList[5]] as Map);
-  currentUser.pullUserImageURL(data[dbList[4]] as String);
+  currentUser.pullUserImageURL(data[dbList[4]]);
   currentUser.pullUserLang(data[dbList[6]] as String);
 
   //TODO:Remove in final

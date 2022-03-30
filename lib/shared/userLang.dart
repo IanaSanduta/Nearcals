@@ -30,12 +30,14 @@ String text(String word) {
       'Apply': 'Apply',
       'Update Successful': 'Update Successful',
       'Apply Settings': 'Apply Settings',
-      'Total Calories': 'Total Calories',
+      'Remaining Calories': 'Remaining Calories',
       'Enter your email': 'Enter your email',
       'Enter your password': 'Enter your password',
       'Camera': 'Camera',
       'Gallery': 'Gallery',
-      'Profile Photo': 'Profile Photo'
+      'Profile Photo': 'Profile Photo',
+      'Select Language': 'Select Language',
+      'User Setup': 'User Setup'
     };
   }
 
@@ -65,12 +67,14 @@ String text(String word) {
       'Apply': 'Aplicar',
       'Update Successful': 'Actualización correcta',
       'Apply Settings': '.',
-      'Total Calories': '.',
+      'Remaining Calories': '.',
       'Enter your email': '.',
       'Enter your password': '.',
       'Camera': '.',
       'Gallery': '.',
-      'Profile Photo': '.'
+      'Profile Photo': '.',
+      'Select Language': '.',
+      'User Setup': '.'
     };
   }
 
@@ -100,12 +104,14 @@ String text(String word) {
       'Apply': '今すぐ申し込む',
       'Update Successful': '更新に成功',
       'Apply Settings': '設定を適用する',
-      'Total Calories': '総カロリー',
+      'Remaining Calories': '残りのカロリー',
       'Enter your email': 'メールアドレスを入力',
       'Enter your password': 'パスワードを入力してください',
       'Camera': 'カメラ',
       'Gallery': 'フォトギャラリー',
-      'Profile Photo': 'プロフィールの写真'
+      'Profile Photo': 'プロフィールの写真',
+      'Select Language': '言語を選択する',
+      'User Setup': 'ユーザー設定'
     };
   }
 
@@ -139,7 +145,9 @@ String text(String word) {
       'Enter your password': '.',
       'Camera': '.',
       'Gallery': '.',
-      'Profile Photo': '.'
+      'Profile Photo': '.',
+      'Select Language': '.',
+      'Congratulations Account Was Created':'.'
     };}*/
   else {
     //this will probably never run
