@@ -67,7 +67,7 @@ String text(String word) {
       'Apply': 'Aplicar',
       'Update Successful': 'Actualización Completa',
       'Apply Settings': 'Aplicar Ajustes',
-      'Total Calories': 'Calorias Totales',
+      'Remaining Calories': 'Calorias Totales',
       'Enter your email': 'Ingrese correo electronico',
       'Enter your password': 'Ingrese su contrasena',
       'Camera': 'Camara',
