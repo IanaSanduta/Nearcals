@@ -13,9 +13,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     int? curCals = currentUser.getCurrentCals();
     int? dayCals = currentUser.getDailyCals();
-    int? burntCalsInt = dayCals! - curCals!;
-    double? burntCalsPer = (curCals / dayCals);
-    String stBurntCals = burntCalsInt.toString();
+    int? calsLeftInt = dayCals! - curCals!;
+    double? calsLeftPer = (curCals / dayCals);
+    String stCalsLeft = calsLeftInt.toString();
+    double overCalsPer = 0.0;
+    int overCalsInt = 0;
+    if (calsLeftPer > 1.0) {
+      overCalsPer = calsLeftPer - 1;
+      overCalsInt = calsLeftInt - dayCals;
+      calsLeftPer = 1.0;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(text('Home')),
@@ -49,10 +56,10 @@ class HomePage extends StatelessWidget {
           CircularPercentIndicator(
             radius: 100.0,
             lineWidth: 30.0,
-            percent: burntCalsPer,
+            percent: calsLeftPer,
             animation: true,
             animationDuration: 1500,
-            center: Text(stBurntCals, style: const TextStyle(fontSize: 20)),
+            center: Text(stCalsLeft, style: const TextStyle(fontSize: 20)),
             footer: Text(
               text('Remaining Calories'),
               style: TextStyle(
@@ -61,7 +68,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             progressColor: Colors.lightBlueAccent,
-          )
+          ),
         ],
       ),
     );

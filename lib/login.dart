@@ -47,17 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //Define Widget variables
-    var iconObscure = IconButton(
-      icon: Icon(
-        _isObscure ? Icons.visibility : Icons.visibility_off,
-        color: Colors.white,
-      ),
-      onPressed: () {
-        setState(() {
-          _isObscure = !_isObscure;
-        });
-      },
-    );
     var styleInput = const TextStyle(color: Colors.white);
 
     //Start of the UI
