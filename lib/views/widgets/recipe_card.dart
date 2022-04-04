@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:nearcals/maps.dart';
 
+import '../../classes/userClass.dart';
 import '../../shared/HomeLoadingPage.dart';
 
 class RecipeCard extends StatelessWidget {
@@ -68,8 +69,7 @@ class RecipeCard extends StatelessWidget {
                 color: Colors.white,
                 iconSize: 25,
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
+                  currentUser.setCurrentCals(currentUser.getCurrentCals()! - calories.toInt());
                 },
               ),
             ],

@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     int? curCals = currentUser.getCurrentCals();
     int? dayCals = currentUser.getDailyCals();
     int? calsLeftInt = dayCals! - curCals!;
-    double? calsLeftPer = (curCals / dayCals);
+    double? calsLeftPer = 1 - (curCals / dayCals);
     String stCalsLeft = calsLeftInt.toString();
     double overCalsPer = 0.0;
     int overCalsInt = 0;
