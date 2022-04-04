@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class FoodApi {
   static Future<List<Food>> getcalories() async {
     var uri = Uri.https('trackapi.nutritionix.com', '/v2/search/instant',
-        {"branded": "food_name,brand_name,nf_calories"});
+        {"query": "branded"});
 
     final response = await http.get(uri, headers: {
       "x-app-id": "bd3f7a80",
@@ -21,8 +21,8 @@ class FoodApi {
     List _temp = [];
 
     print("print");
-    for (var i in data['branded']) {
-      _temp.add(i[{}]);
+    for (var i in data['response']) {
+      _temp.add(i['food_name']['brand_name']['nf_calories']);
     }
     print("print1");
     print(_temp.length);
@@ -44,15 +44,17 @@ class FoodApi {
 
     Map data = jsonDecode(response.body);
     List _temp = [];
-/*
+
     for (var i in data['branded']) {
       _temp.add(i['food_name']['brand_name']['nf_calories']);
     }
 
- */
+
     print(_temp.length);
 
     return Food.caloriesFromSnapshot(_temp);
+
+
   }
 }
 

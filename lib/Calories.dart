@@ -15,15 +15,15 @@ class Calories extends StatefulWidget {
 class _CaloriesState extends State<Calories> {
   late List<Food> _foodlist;
   bool _isLoading = true;
-/*
-  final TextEditingController _filter = new TextEditingController();
-  final dio = new Dio(); // for http requests
-  String _searchText = "";
-  List names = [];// names we get from API
-  List filteredNames = []; // names filtered by search text
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text( 'Search Example' );
- */
+  final myController = TextEditingController()..text;
+
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -43,9 +43,10 @@ class _CaloriesState extends State<Calories> {
     return Scaffold(
         appBar: AppBar(
           title:
-          const TextField(
+           TextField(
+            controller: myController,
             style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search, color: Colors.white),
               border: OutlineInputBorder(),
               hintText: 'Enter a search term',
@@ -63,25 +64,6 @@ class _CaloriesState extends State<Calories> {
                   brandName: _foodlist[index].brandName);
             })
     );
-
   }
-/*
-  Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter a search term',
-            ),
-          ),
-        ),
-      ],
-    );
-
-   */
-
 }
 
