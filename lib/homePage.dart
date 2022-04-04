@@ -72,6 +72,18 @@ class HomePage extends StatelessWidget {
             ),
             progressColor: Colors.lightBlueAccent,
           ),
+          // ignore: deprecated_member_use
+          FlatButton(
+            onPressed: () {},
+            color: Colors.lightBlue.shade500,
+            child: const Text('Calories Consumed'),
+          ),
+          // ignore: deprecated_member_use
+          FlatButton(
+            onPressed: () {},
+            color: Colors.lightBlue.shade500,
+            child: const Text('Calories Remaining'),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
