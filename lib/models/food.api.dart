@@ -20,9 +20,11 @@ class FoodApi {
     Map data = jsonDecode(response.body);
     List _temp = [];
 
+    print("print");
     for (var i in data['branded']) {
-      _temp.add(i['food_name']['brand_name']['nf_calories']);
+      _temp.add(i[{}]);
     }
+    print("print1");
     print(_temp.length);
 
     return Food.caloriesFromSnapshot(_temp);
@@ -60,7 +62,13 @@ class FoodApi {
 
 
 
+
+
 /*
+import 'dart:convert';
+import 'package:nearcals/models/food.dart';
+import 'package:http/http.dart' as http;
+
 class FoodApi {
   static Future<List<Food>> getcalories() async {
     var uri = Uri.https('api.nutritionix.com', '/v1_1/search/',
