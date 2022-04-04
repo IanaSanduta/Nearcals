@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
-import 'package:nearcals/shared/userLang.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -48,17 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //Define Widget variables
-    var iconObscure = IconButton(
-      icon: Icon(
-        _isObscure ? Icons.visibility : Icons.visibility_off,
-        color: Colors.white,
-      ),
-      onPressed: () {
-        setState(() {
-          _isObscure = !_isObscure;
-        });
-      },
-    );
     var styleInput = const TextStyle(color: Colors.white);
 
     //Start of the UI
@@ -110,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ElevatedButton(
                 onPressed: authLongIn,
-                child: Text(text('Login')),
+                child: const Text('Login'),
               ),
             ],
           ),

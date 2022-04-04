@@ -30,12 +30,14 @@ String text(String word) {
       'Apply': 'Apply',
       'Update Successful': 'Update Successful',
       'Apply Settings': 'Apply Settings',
-      'Total Calories': 'Total Calories',
+      'Remaining Calories': 'Remaining Calories',
       'Enter your email': 'Enter your email',
       'Enter your password': 'Enter your password',
       'Camera': 'Camera',
       'Gallery': 'Gallery',
-      'Profile Photo': 'Profile Photo'
+      'Profile Photo': 'Profile Photo',
+      'Select Language': 'Select Language',
+      'User Setup': 'User Setup'
     };
   }
 
@@ -44,33 +46,35 @@ String text(String word) {
   // Someone who actually knows Spanish should proabably fill this out ;^)
   if (langList[1] == currentUser.getUserLang()) {
     languageLibrary = {
-      'Home': 'Hogar',
-      'Profile': '.',
-      'Map': '.',
-      'Calories': '.',
-      'Favorites': '.',
-      'Settings': 'Configuración',
-      'Guide': '.',
-      'Logout': '.',
-      'Email': '.',
-      'Username': '.',
-      'Daily Calories': '.',
-      'Save': '.',
-      'Foodie Map': '.',
-      'Sign Up': '.',
-      'Login': '.',
+      'Home': 'Inicio',
+      'Profile': 'Perfil',
+      'Map': 'Mapas',
+      'Calories': 'Calorias',
+      'Favorites': 'Favoritos',
+      'Settings': 'Ajustes',
+      'Guide': 'Guias',
+      'Logout': 'Cerrar Sesion',
+      'Email': 'Correo Electronico',
+      'Username': 'Nombre de Usuario',
+      'Daily Calories': 'Calorias Diarias',
+      'Save': 'Guardar',
+      'Foodie Map': 'Mapa de Restaurantes',
+      'Sign Up': 'Registrar',
+      'Login': 'Iniciar Sesion',
       'Language': 'Idioma',
-      'General': '.',
-      'GENERAL': '.',
+      'General': 'General',
+      'GENERAL': 'GENERAL',
       'Apply': 'Aplicar',
-      'Update Successful': 'Actualización correcta',
-      'Apply Settings': '.',
-      'Total Calories': '.',
-      'Enter your email': '.',
-      'Enter your password': '.',
-      'Camera': '.',
-      'Gallery': '.',
-      'Profile Photo': '.'
+      'Update Successful': 'Actualización Completa',
+      'Apply Settings': 'Aplicar Ajustes',
+      'Remaining Calories': 'Calorias Totales',
+      'Enter your email': 'Ingrese correo electronico',
+      'Enter your password': 'Ingrese su contrasena',
+      'Camera': 'Camara',
+      'Gallery': 'Galeria',
+      'Profile Photo': 'Foto de Perfil',
+      'Select Language': '.',
+      'User Setup': '.',
     };
   }
 
@@ -100,12 +104,14 @@ String text(String word) {
       'Apply': '今すぐ申し込む',
       'Update Successful': '更新に成功',
       'Apply Settings': '設定を適用する',
-      'Total Calories': '総カロリー',
+      'Remaining Calories': '残りのカロリー',
       'Enter your email': 'メールアドレスを入力',
       'Enter your password': 'パスワードを入力してください',
       'Camera': 'カメラ',
       'Gallery': 'フォトギャラリー',
-      'Profile Photo': 'プロフィールの写真'
+      'Profile Photo': 'プロフィールの写真',
+      'Select Language': '言語を選択する',
+      'User Setup': 'ユーザー設定'
     };
   }
 
@@ -139,7 +145,9 @@ String text(String word) {
       'Enter your password': '.',
       'Camera': '.',
       'Gallery': '.',
-      'Profile Photo': '.'
+      'Profile Photo': '.',
+      'Select Language': '.',
+      'User Setup':'.'
     };}*/
   else {
     //this will probably never run

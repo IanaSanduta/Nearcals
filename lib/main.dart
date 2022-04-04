@@ -3,10 +3,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nearcals/shared/HomeLoadingPage.dart';
 import 'package:nearcals/login.dart';
-import 'package:nearcals/register.dart';
-import 'package:nearcals/shared/userLang.dart';
+import 'package:nearcals/RegFile/register.dart';
+import 'package:nearcals/shared/HomeLoadingPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,6 +77,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? firebaseUser = FirebaseAuth.instance.currentUser?.uid;
+
     if (firebaseUser != null) {
       return const HomeLoadingPage();
     } else {
