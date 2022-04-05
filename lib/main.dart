@@ -77,6 +77,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? firebaseUser = FirebaseAuth.instance.currentUser?.uid;
+
     if (firebaseUser != null) {
       return const HomeLoadingPage();
     } else {

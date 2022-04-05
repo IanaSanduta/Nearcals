@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/naviDrawer.dart';
 import 'package:nearcals/shared/userLang.dart';
@@ -30,7 +31,9 @@ class HomePage extends StatelessWidget {
       ),
       drawer: const NaviDrawer(),
       body: Column(
-        children: [
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
           Stack(
             children: [
               Opacity(
@@ -69,7 +72,24 @@ class HomePage extends StatelessWidget {
             ),
             progressColor: Colors.lightBlueAccent,
           ),
+          // ignore: deprecated_member_use
+          FlatButton(
+            onPressed: () {},
+            color: Colors.lightBlue.shade500,
+            child: const Text('Calories Consumed'),
+          ),
+          // ignore: deprecated_member_use
+          FlatButton(
+            onPressed: () {},
+            color: Colors.lightBlue.shade500,
+            child: const Text('Calories Remaining'),
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+        backgroundColor: Colors.blue.shade800,
       ),
     );
   }

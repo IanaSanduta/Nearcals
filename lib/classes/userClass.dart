@@ -165,9 +165,10 @@ class UserClass {
 
   // currentUser.setUserName(value) updates the firestore and firebase.auth values for the current users display/username to the value given
   Future<void> setUserImage(File im) async {
+    String imURL = '';
     ref.putFile(im);
     ref.getDownloadURL().then((value) {
-      String imURL = value.toString();
+      imURL = value.toString();
       db.doc(uID).update({dbList[4]: imURL});
       print(imURL);
       userImageURL = imURL;
@@ -176,7 +177,7 @@ class UserClass {
     uID = FirebaseAuth.instance.currentUser!.uid;
     DocumentSnapshot snapshot = await db.doc(uID).get();
     var data = snapshot.data() as Map;
-    await currentUser.pullUserImageURL(data[dbList[4]] as String).then((value) {
+    await currentUser.pullUserImageURL(imURL).then((value) {
       print('Image Updated');
     });
   }

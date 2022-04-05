@@ -98,7 +98,7 @@ class _RegScreenState extends State<RegScreen> {
         User? user = FirebaseAuth.instance.currentUser;
         if (user != null) {
           run = regUsernameController.text.trim();
-          RegUser regUser = new RegUser(regUsernameController.text.trim(),
+          regUser = RegUser(regUsernameController.text.trim(),
               regEmailController.text.trim(), regPassController.text.trim());
           Navigator.push(
               context,
