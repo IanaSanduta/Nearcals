@@ -11,7 +11,7 @@ class FoodApi {
 
     final response = await http.get(uri, headers: {
       "appId": "bd3f7a80",
-      "x-rapidapi-key": "43bb77efc418470e481a38f9f73b0891",
+      "x-rapidapi-key": "2487cda686954cf1c762776c8c748e9a",
       "useQueryString": "true"
     });
     print(response.body);
