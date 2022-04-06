@@ -45,7 +45,7 @@ class _CaloriesState extends State<Calories> {
           title:
            TextField(
             controller: myController,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search, color: Colors.white),
               border: OutlineInputBorder(),
