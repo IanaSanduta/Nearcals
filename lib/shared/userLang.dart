@@ -2,7 +2,7 @@
 
 import 'package:nearcals/classes/userClass.dart';
 
-final List langList = ['English', 'Español', 'Japanese 日本'];
+final List langList = ['English', 'Español', 'Japanese 日本語'];
 String text(String word) {
   String result = '';
   Map<String, String>? languageLibrary;
@@ -37,7 +37,13 @@ String text(String word) {
       'Gallery': 'Gallery',
       'Profile Photo': 'Profile Photo',
       'Select Language': 'Select Language',
-      'User Setup': 'User Setup'
+      'User Setup': 'User Setup',
+      'Add Meal Calories:': 'Add Meal Calories:',
+      'Add Burnt Calories:': 'Add Burnt Calories:',
+      'Please use only whole numbers.': 'Please use only whole numbers.',
+      'Please enter a value into the text fields.':
+          'Please enter a value into the text fields.',
+      'No Values Changed!': 'No Values Changed!',
     };
   }
 
@@ -75,6 +81,11 @@ String text(String word) {
       'Profile Photo': 'Foto de Perfil',
       'Select Language': '.',
       'User Setup': '.',
+      'Add Meal Calories:': '.',
+      'Add Burnt Calories:': '.',
+      'Please use only whole numbers.': '.',
+      'Please enter a value into the text fields.': '.',
+      'No Values Changed!': '.',
     };
   }
 
@@ -111,7 +122,12 @@ String text(String word) {
       'Gallery': 'フォトギャラリー',
       'Profile Photo': 'プロフィールの写真',
       'Select Language': '言語を選択する',
-      'User Setup': 'ユーザー設定'
+      'User Setup': 'ユーザー設定',
+      'Add Meal Calories:': '食事カロリーを追加:',
+      'Add Burnt Calories:': '燃焼カロリーを追加:',
+      'Please use only whole numbers.': '整数のみを使用してください。',
+      'Please enter a value into the text fields.': 'テキストフィールドに値を入力してください。',
+      'No Values Changed!': '値は変更されません!',
     };
   }
 
@@ -147,7 +163,14 @@ String text(String word) {
       'Gallery': '.',
       'Profile Photo': '.',
       'Select Language': '.',
-      'User Setup':'.'
+      'User Setup':'.',
+      'Add Meal Calories:': '.',
+      'Add Burnt Calories:': '.',
+      'Please use only whole numbers.': '.',
+      'Please enter a value into text field.' :'.',
+      'No Update Made':'.',
+      
+      
     };}*/
   else {
     //this will probably never run

@@ -284,19 +284,28 @@ class _ProfileState extends State<Profile> {
 
   ///Function to update information profile
   void updateProfile() {
-    currentUser.setUserName(regUsernameController.text.trim());
-    currentUser.setEmail(regEmailController.text.trim());
-    currentUser.setDailyCals(int.parse(regDailyCalControl.text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(text('Update Successful')),
-          duration: const Duration(seconds: 3),
-          backgroundColor: Colors.green.shade700),
-    );
-    currentUser.setUserImage(newImage).then((value) {
-      Navigator.pop(context);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
-    });
+    try {
+      currentUser.setUserName(regUsernameController.text.trim());
+      currentUser.setEmail(regEmailController.text.trim());
+      currentUser.setDailyCals(int.parse(regDailyCalControl.text));
+      currentUser.setUserImage(newImage).then((value) {
+        Navigator.pop(context);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const HomeLoadingPage()));
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(text('Update Successful')),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.green.shade700),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(text('No Values Changed!')),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red.shade100),
+      );
+    }
   }
 }
