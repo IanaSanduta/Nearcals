@@ -7,6 +7,7 @@ import 'package:nearcals/homePage.dart';
 import 'package:nearcals/maps.dart';
 import 'package:nearcals/profile.dart';
 import 'package:nearcals/settings.dart';
+import 'package:nearcals/shared/LocationLoadingPage.dart';
 import 'package:nearcals/shared/userLang.dart';
 import 'package:nearcals/calories.dart';
 import 'package:nearcals/main.dart';
@@ -87,8 +88,10 @@ class _NaviDrawer extends State<NaviDrawer> {
               title: Text(text('Map')),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Maps()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LocationLoadingPage()));
               }),
           ListTile(
               iconColor: Colors.blue.shade900,
