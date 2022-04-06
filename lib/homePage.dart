@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
             style: const TextStyle(color: Colors.black),
             decoration: const InputDecoration(
               prefixIcon: Icon(
-                Icons.min,
+                Icons.add,
                 color: Colors.blueAccent,
               ),
             ),
