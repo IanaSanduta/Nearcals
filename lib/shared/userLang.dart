@@ -79,13 +79,15 @@ String text(String word) {
       'Camera': 'Camara',
       'Gallery': 'Galeria',
       'Profile Photo': 'Foto de Perfil',
-      'Select Language': '.',
-      'User Setup': '.',
-      'Add Meal Calories:': '.',
-      'Add Burnt Calories:': '.',
-      'Please use only whole numbers.': '.',
-      'Please enter a value into the text fields.': '.',
-      'No Values Changed!': '.',
+      'Select Language': 'Seleccionar idioma',
+      'User Setup': 'Configuración de usuario',
+      'Add Meal Calories:': 'Agregue calorías de la comida:',
+      'Add Burnt Calories:': 'Añadir calorías quemadas:',
+      'Please use only whole numbers.':
+          'Por favor, utilice sólo números enteros.',
+      'Please enter a value into the text fields.':
+          'Introduzca un valor en los campos de texto.',
+      'No Values Changed!': '¡No hay valores cambiados!',
     };
   }
 
