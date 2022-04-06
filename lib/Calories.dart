@@ -6,6 +6,7 @@ import 'models/food.api.dart';
 import 'models/food.dart';
 
 class Calories extends StatefulWidget {
+
   const Calories({Key? key}) : super(key: key);
 
   @override
@@ -15,8 +16,7 @@ class Calories extends StatefulWidget {
 class _CaloriesState extends State<Calories> {
   late List<Food> _foodlist;
   bool _isLoading = true;
-  final myController = TextEditingController()..text;
-
+  var myController = TextEditingController()..text;
 
   @override
   void dispose() {
@@ -65,5 +65,5 @@ class _CaloriesState extends State<Calories> {
             })
     );
   }
-}
 
+}

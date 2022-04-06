@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:nearcals/Calories.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
 import 'package:nearcals/shared/naviDrawer.dart';
@@ -158,7 +159,10 @@ class HomePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Calories()));
+        },
         child: const Icon(Icons.add),
         backgroundColor: Colors.blue.shade800,
       ),

@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:nearcals/homePage.dart';
 import 'package:nearcals/maps.dart';
 
 import '../../classes/userClass.dart';
@@ -69,7 +70,9 @@ class RecipeCard extends StatelessWidget {
                 color: Colors.white,
                 iconSize: 25,
                 onPressed: () {
-                  currentUser.setCurrentCals(currentUser.getCurrentCals()! - calories.toInt());
+                  currentUser.setCurrentCals(currentUser.getCurrentCals()! + calories.toInt());
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const HomePage()));
                 },
               ),
             ],
