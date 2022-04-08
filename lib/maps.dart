@@ -44,6 +44,8 @@ Future<void> RequestPermission() async {
   lat = _locationData.latitude!;
   long = _locationData.longitude!;
   _currentLocation = LatLng(lat, long);
+  print(lat);
+  print(long);
 }
 
 List getCurrentLocation() {
