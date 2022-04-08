@@ -1,14 +1,22 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nearcals/Calories.dart';
 import 'package:nearcals/models/food.dart';
 import 'package:http/http.dart' as http;
+import 'package:nearcals/maps.dart';
+import 'package:nearcals/Calories.dart';
+
+String query = getString();
 
 class FoodApi {
   static Future<List<Food>> getcalories() async {
+
     var uri = Uri.https('trackapi.nutritionix.com', '/v2/search/instant',
         {"query": "branded"});
+
 
     final response = await http.get(uri, headers: {
       "x-app-id": "bd3f7a80",
@@ -16,20 +24,18 @@ class FoodApi {
       "useQueryString": "true"
     });
     print(response.body);
-
-
     Map data = jsonDecode(response.body);
     List _temp = [];
 
-    print("print");
-    for (var i in data['common']) {
-      _temp.add(i['food_name']['brand_name']['nf_calories']);
+    for (var i in data['branded']) {
+      _temp.add(i);
     }
-    print("print1");
+
     print(_temp.length);
 
     return Food.caloriesFromSnapshot(_temp);
   }
+  /*
 
   static Future<List<Food>> getlocation() async {
     var uri = Uri.https('trackapi.nutritionix.com', '/v2/locations',
@@ -43,6 +49,11 @@ class FoodApi {
     print(response.body);
 
 
+
+    List sc = getCurrentLocation();
+    LatLng _cl = LatLng(sc[0], sc[1]);
+
+
     Map data = jsonDecode(response.body);
     List _temp = [];
 
@@ -50,13 +61,13 @@ class FoodApi {
       _temp.add(i['address']);
     }
 
-      //['food_name']['brand_name']['nf_calories']
-
 
     print(_temp.length);
 
     return Food.caloriesFromSnapshot(_temp);
   }
+
+   */
 
 }
 

@@ -9,7 +9,7 @@ class Food {
 
   factory Food.fromJson(dynamic json) {
     return Food(
-        name: json['item_name'] as String,
+        name: json['food_name'] as String,
         brandName: json['brand_name'] as String,
         calories: json['nf_calories'] as int);
   }
