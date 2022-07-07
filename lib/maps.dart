@@ -1,10 +1,4 @@
-import 'dart:ffi';
-import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
-import 'package:nearcals/shared/naviDrawer.dart';
-import 'package:nearcals/shared/userLang.dart';
-
+/*
 const LatLng _center = LatLng(40.7802238, -111.876325);
 late LatLng _currentLocation;
 double lat = 0.0;
@@ -75,3 +69,4 @@ class _MyAppState extends State<Maps> {
     );
   }
 }
+*/
