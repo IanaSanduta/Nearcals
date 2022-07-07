@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:nearcals/Calories.dart';
 import 'package:nearcals/classes/userClass.dart';
 import 'package:nearcals/shared/HomeLoadingPage.dart';
 import 'package:nearcals/shared/naviDrawer.dart';
@@ -155,13 +156,30 @@ class HomePage extends StatelessWidget {
             color: Colors.lightBlue.shade500,
             child: Text(text('Apply')),
           ),
+          scanButton(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Calories()));
+        },
         child: const Icon(Icons.add),
         backgroundColor: Colors.blue.shade800,
       ),
+    );
+  }
+
+  TextButton scanButton() {
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.blue.shade800,
+        primary: Colors.white,
+        padding: const EdgeInsets.all(18.0),
+        textStyle: const TextStyle(fontSize: 20),
+      ),
+      onPressed: () {},
+      child: const Text('Scan'),
     );
   }
 }

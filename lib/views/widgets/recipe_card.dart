@@ -1,7 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:nearcals/homePage.dart';
 import 'package:nearcals/maps.dart';
+
+import '../../classes/userClass.dart';
+import '../../shared/HomeLoadingPage.dart';
 
 class RecipeCard extends StatelessWidget {
   final String name;
@@ -60,6 +64,16 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add_circle, color: Colors.white,),
+                color: Colors.white,
+                iconSize: 25,
+                onPressed: () {
+                  currentUser.setCurrentCals(currentUser.getCurrentCals()! + calories.toInt());
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const HomePage()));
+                },
               ),
             ],
           ),

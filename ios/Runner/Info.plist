@@ -49,5 +49,9 @@
 	<string>Permission for access to the camera</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Permission for access to microphone</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location permission</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>Location permission in background</string>
 </dict>
 </plist>
