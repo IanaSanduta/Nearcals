@@ -156,6 +156,7 @@ class HomePage extends StatelessWidget {
             color: Colors.lightBlue.shade500,
             child: Text(text('Apply')),
           ),
+          scanButton(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -166,6 +167,19 @@ class HomePage extends StatelessWidget {
         child: const Icon(Icons.add),
         backgroundColor: Colors.blue.shade800,
       ),
+    );
+  }
+
+  TextButton scanButton() {
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.blue.shade800,
+        primary: Colors.white,
+        padding: const EdgeInsets.all(18.0),
+        textStyle: const TextStyle(fontSize: 20),
+      ),
+      onPressed: () {},
+      child: const Text('Scan'),
     );
   }
 }
